@@ -1,0 +1,18 @@
+Students:
+
+Can enroll in courses
+Can view course materials
+Can submit assignments
+Can participate in discussions
+Can provide feedback on courses
+Can view their own progress and grades
+
+
+Teachers (Instructors):
+
+Can create and manage courses
+Can upload course materials
+Can grade assignments and quizzes
+Can interact with students via discussions
+Can view analytics and progress reports
+Can customize course settings

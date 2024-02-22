@@ -1,0 +1,11 @@
+Models.txt - Define database models that are crucial for all other functionalities. done
+Tables.txt - Understand and implement the database schema. done
+Templates.txt - Create user interface components.
+Forms.txt - Develop forms for user interactions.
+Validators.txt - Prepare validation logic for user inputs across forms and API requests.
+Views.txt - Implement logic for processing and responding to user requests.
+API Routes.txt - Set up backend routes for API interactions.
+File Management.txt - Organize and manage file uploads and downloads.
+WebSockets.txt - Expand on real-time communication features.
+Test.txt - Conduct comprehensive testing to ensure functionality.
+Security Practices.txt - Implement security measures to safeguard the platform.

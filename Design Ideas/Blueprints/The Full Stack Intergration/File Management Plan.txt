@@ -1,0 +1,35 @@
+File Upload Organization Plan:
+
+Profile Pictures:
+
+Location: ELearning/ELearning/media/Profile_Photos
+Description: Profile pictures uploaded by users will be stored in this directory.
+Course Material:
+
+Location: ELearning/ELearning/media/Course_Material
+Organization:
+Each course will have its own folder.
+Inside each course folder, there will be subfolders for each topic.
+Files uploaded for each topic will be stored within their respective topic folders.
+Example Structure:
+
+markdown
+Copy code
+ELearning/
+└── ELearning/
+    └── media/
+        ├── Course_Material/
+        │   ├── Course1/
+        │   │   ├── Topic1/
+        │   │   │   ├── file1.pdf
+        │   │   │   └── file2.docx
+        │   │   ├── Topic2/
+        │   │   │   └── file3.png
+        │   │   └── ...
+        │   ├── Course2/
+        │   │   ├── Topic1/
+        │   │   │   └── file4.jpg
+        │   │   └── ...
+        │   └── ...
+        └── Profile_Photos/
+This organization plan ensures that course materials are stored in a structured manner, making it easy to navigate and manage files based on courses and topics. Additionally, profile pictures are stored separately in their own designated folder for user profiles.

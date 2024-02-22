@@ -1,0 +1,42 @@
+Packages to Install
+
+Django:
+
+Description: A high-level Python web framework.
+Justification: Essential for building the eLearning platform.
+Command: pip install Django
+Django REST framework:
+
+Description: Toolkit for building Web APIs in Django.
+Justification: Required for implementing RESTful APIs.
+Command: pip install djangorestframework
+Django Channels:
+
+Description: Extends Django for handling WebSockets and asynchronous protocols.
+Justification: Necessary for real-time chat and notifications.
+Command: pip install channels
+Pillow (PIL Fork):
+
+Description: Powerful image processing library for Python.
+Justification: Required for image handling, including avatars and uploaded content.
+Command: pip install Pillow
+Redis (Optional for Channel Layer):
+
+Description: In-memory data store used for Django Channels' channel layer.
+Justification: Optional but recommended for scalability and real-time communication.
+Command: pip install redis
+Python-decouple:
+
+Description: Library for separating settings from code using a .env file.
+Justification: Enhances security by keeping sensitive information outside the codebase.
+Command: pip install python-decouple
+psycopg2-binary (For PostgreSQL Database):
+
+Description: PostgreSQL adapter for Python.
+Justification: Required for connecting Django to a PostgreSQL database.
+Command: pip install psycopg2-binary
+requests:
+
+Description: Library for making HTTP requests in Python.
+Justification: Useful for integrating external APIs or services if needed.
+Command: pip install requests

@@ -1,0 +1,95 @@
+User Table:
+
+Name: User
+Description: Stores user information for authentication and management.
+Fields:
+ID (Primary Key)
+Username (CharField)
+Email (EmailField)
+Password (CharField)
+User Type (ChoiceField)
+
+
+
+
+Relevance to Scope: Mandatory
+Affected Components: User authentication, account management.
+UserProfile Table:
+
+Name: UserProfile
+Description: Stores additional user details and customization.
+Fields:
+ID (Primary Key, Foreign Key to User Table)
+Real Name (CharField)
+Photo (ImageField)
+Bio (TextField)
+Qualifications (TextField)
+Relevance to Scope: Extra
+Affected Components: User profiles, personalization.
+Course Table:
+
+Name: Course
+Description: Stores information about courses offered.
+Fields:
+ID (Primary Key)
+Title (CharField)
+Description (TextField)
+Teacher (Foreign Key to User Table)
+Relevance to Scope: Mandatory
+Affected Components: Course management, enrollment.
+Enrollment Table:
+
+Name: Enrollment
+Description: Tracks student enrollment in courses.
+Fields:
+ID (Primary Key)
+Student (Foreign Key to User Table)
+Course (Foreign Key to Course Table)
+Relevance to Scope: Mandatory
+Affected Components: Course enrollment, user-course relationships.
+CourseMaterial Table:
+
+Name: CourseMaterial
+Description: Stores course materials.
+Fields:
+ID (Primary Key)
+Course (Foreign Key to Course Table)
+Title (CharField)
+File (FileField)
+Topic (CharField or ForeignKey to Topic Table)
+Date Uploaded (DateTimeField)
+Relevance to Scope: Mandatory
+Affected Components: Course materials, teacher uploads.
+Topic Table:
+
+Name: Topic
+Description: Stores information about topics or sections within a course.
+Fields:
+ID (Primary Key)
+Name (CharField)
+Course (Foreign Key to Course Table)
+Relevance to Scope: Mandatory
+Affected Components: Course material organization.
+Feedback Table:
+
+Name: Feedback
+Description: Collects feedback from students on courses.
+Fields:
+ID (Primary Key)
+Student (Foreign Key to User Table)
+Course (Foreign Key to Course Table)
+Rating (IntegerField)
+Review (TextField)
+Relevance to Scope: Mandatory
+Affected Components: Course improvement, feedback analysis.
+StatusUpdate Table:
+
+Name: StatusUpdate
+Description: Allows users to post status updates.
+Fields:
+ID (Primary Key)
+User (Foreign Key to User Table)
+Content (TextField)
+Timestamp (DateTimeField)
+Relevance to Scope: Mandatory
+Affected Components: User engagement, communication.

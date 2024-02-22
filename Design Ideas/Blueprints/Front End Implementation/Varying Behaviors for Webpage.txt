@@ -1,0 +1,44 @@
+Home Page:
+
+Students: Students can access their personalized dashboard, which displays enrolled courses, upcoming deadlines, and recommended courses based on their interests.
+Teachers: Teachers can access a dashboard showing courses they teach, recent course activity, and options for creating or managing new courses.
+
+Course List Page:
+
+Students: Students can browse and search for available courses, view course details, and enroll in courses.
+Teachers: Teachers can browse existing courses, search for specific courses, and access additional options for managing courses they teach.
+
+Course Details Page:
+
+Students: Students can view detailed information about a course, including the syllabus, instructor details, and course materials.
+Teachers: Teachers can access additional options for managing course content, such as adding or editing course materials, managing enrolled students, and monitoring course analytics.
+
+Enrollment Page:
+
+Students: Students can enroll in available courses based on their interests and academic requirements.
+Teachers: This page may not be relevant for teachers as they are not expected to enroll in courses.
+
+Course Creation Page:
+
+Students: Students do not have access to create courses.
+Teachers: Teachers can use this page to create new courses, input course details, upload materials, and configure course settings.
+
+Feedback Form Page:
+
+Students: Students can provide feedback on courses they have taken.
+Teachers: Teachers may have access to view feedback provided by students for the courses they teach.
+
+Search Page:
+
+Students: Students can search for courses, users, or content within the platform.
+Teachers: Teachers can search for courses, students, or other teachers, depending on their needs.
+
+Status Update Page:
+
+Students: Students can post status updates, view updates from their connections, and interact with other users' updates.
+Teachers: Teachers can use this page to post updates related to courses, academic events, or announcements for their students.
+
+Real-Time Chat Page:
+
+Students: Students can engage in real-time text-based communication with their peers, instructors, or other users.
+Teachers: Teachers can use chat features to communicate with students, collaborate with colleagues, or provide support as needed.

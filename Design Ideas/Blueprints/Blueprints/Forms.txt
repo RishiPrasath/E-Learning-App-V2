@@ -1,0 +1,66 @@
+Form 1: Login Page Form
+
+Blueprint:
+This form is used for user login on the eLearning platform. It includes the following fields:
+
+Username/Email: Text input for the user's username or email.
+Password: Password input for the user's password.
+Remember Me: Checkbox for users who want to stay logged in.
+Submit Button: Button to initiate the login process.
+Form 2: Registration Page Form
+
+Blueprint:
+This form is used for user registration on the eLearning platform. It includes the following fields:
+
+Username: Text input for the user's desired username.
+Email: Text input for the user's email address.
+Password: Password input for the user's password.
+Name: Text input for the user's full name.
+Profile Photo: File upload field for the user's profile photo.
+Register Button: Button to initiate the registration process.
+Form 3: User Profile Page Form (Edit Profile)
+
+Blueprint:
+This form allows registered users to edit their profile information. It includes the following fields:
+
+Profile Photo: File upload field to change the user's profile photo.
+Name: Text input for the user's full name.
+Username: Text input for the user's username.
+Email: Text input for the user's email address.
+Bio: Text input for the user's bio or description.
+Qualifications: Text input for the user's qualifications.
+Contact Information: Text input for the user's contact information.
+Save Changes Button: Button to save the edited profile information.
+Form 4: Feedback Form Page Form
+
+Blueprint:
+This form allows students to provide feedback on courses they have taken. It includes the following fields:
+
+Course Rating (1 to 5 stars): Radio buttons or a select field to rate the course.
+Content Quality Rating (1 to 5 stars): Radio buttons or a select field to rate the content quality.
+Instructor Engagement Rating (1 to 5 stars): Radio buttons or a select field to rate the instructor's engagement.
+Overall Satisfaction Rating (1 to 5 stars): Radio buttons or a select field to rate the overall satisfaction.
+Comments: Text area for students to provide detailed feedback or comments.
+Submit Feedback Button: Button to submit the feedback.
+Form 5: Course Creation Page Form
+
+Blueprint:
+This form is used by instructors to create new courses on the eLearning platform. It includes the following fields:
+
+Course Title: Text input for the title of the course.
+Description: Text area for a detailed course description.
+Subject: Text input for the subject or category of the course.
+Start Date: Date picker for the course start date.
+End Date: Date picker for the course end date.
+Upload Course Materials: File upload field to upload course materials.
+Enrollment Limit: Text input for setting an enrollment limit (optional).
+Privacy Settings: Dropdown or radio buttons to set course privacy options.
+Save and Publish Button: Button to save and publish the new course.
+Form 6: Real-Time Chat Form
+
+Blueprint:
+This form is used for real-time text-based communication within the chat feature of the eLearning platform. It includes the following fields:
+
+Message Input: Text input field for composing and sending messages.
+Attachment: File upload field for attaching files or multimedia content (optional).
+Send Button: Button to send the composed message.

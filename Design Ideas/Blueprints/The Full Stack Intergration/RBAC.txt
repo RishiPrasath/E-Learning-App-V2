@@ -1,0 +1,650 @@
+Access Control Rules for Login Page:
+
+Only anonymous users (unauthenticated users) can access the login page.
+Authenticated users (students, teachers, administrators) are redirected to their respective dashboard or homepage upon successful login.
+The login page should not be accessible to authenticated users unless they log out of their current session.
+Roles and Permissions:
+
+Anonymous Users:
+Role: Unauthenticated
+Permissions: Can access the login page to authenticate themselves.
+Authenticated Users:
+a. Students:
+Role: Student
+Permissions:
+Can access their profile page.
+Can enroll in courses.
+Can view course materials.
+Can participate in discussions.
+b. Teachers:
+Role: Teacher
+Permissions:
+Can access their profile page.
+Can create and manage courses.
+Can upload course materials.
+Can grade assignments and assessments.
+c. Administrators:
+Role: Administrator
+Permissions:
+Can access admin panel.
+Can manage users, courses, and other administrative tasks.
+Can perform CRUD operations on user accounts and course data.
+Now, let's define the RBAC blueprint for the Login Page integration plan:
+
+RBAC Blueprint for Login Page:
+
+Access Control Rules:
+
+Only anonymous users (unauthenticated) are allowed to access the login page.
+Authenticated users are redirected to their respective dashboard upon successful login.
+Roles and Permissions:
+a. Anonymous Users:
+
+Role: Unauthenticated
+Permissions: Access to the login page.
+b. Authenticated Users:
+i. Students:
+- Role: Student
+- Permissions:
+- Access to profile page.
+- Enrollment in courses.
+- Access to course materials.
+- Participation in discussions.
+
+ii. Teachers:
+- Role: Teacher
+- Permissions:
+- Access to profile page.
+- Creation and management of courses.
+- Uploading course materials.
+- Grading assignments.
+
+iii. Administrators:
+- Role: Administrator
+- Permissions:
+- Access to admin panel.
+- User and course management.
+- CRUD operations on user accounts and course data.
+
+
+
+
+Access Control Rules for Registration Page:
+
+Anonymous users (unauthenticated) can access the registration page to create a new account.
+Authenticated users (already registered) should not have access to the registration page.
+Roles and Permissions:
+
+Anonymous Users:
+
+Role: Unauthenticated
+Permissions: Can access the registration page to create a new account.
+Authenticated Users:
+
+Role: Authenticated
+Permissions: No access to the registration page. They are already registered users.
+Now, let's outline the RBAC blueprint for the Registration Page integration plan:
+
+RBAC Blueprint for Registration Page:
+
+Access Control Rules:
+
+Anonymous users (unauthenticated) have access to the registration page to create a new account.
+Authenticated users (already registered) are not allowed to access the registration page.
+Roles and Permissions:
+a. Anonymous Users:
+
+Role: Unauthenticated
+Permissions: Access to the registration page.
+b. Authenticated Users:
+
+Role: Authenticated
+Permissions: No access to the registration page.
+
+
+
+
+
+Access Control Rules for User Profile Page:
+
+Authenticated users can access their own profile page to view and edit their profile information.
+Unauthenticated users (guests) cannot access the user profile page.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access and view their own profile page.
+Can edit their own profile information (e.g., username, email, profile picture).
+Can access account settings and change password or email address.
+Can delete their own account.
+Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the user profile page.
+Now, let's outline the RBAC blueprint for the User Profile Page integration plan:
+
+RBAC Blueprint for User Profile Page:
+
+Access Control Rules:
+
+Authenticated users have access to their own profile page to view and edit profile information, access account settings, and delete their account.
+Unauthenticated users (guests) do not have access to the user profile page.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Access and view their own profile page.
+Edit their own profile information.
+Access account settings and change password or email address.
+Delete their own account.
+b. Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the user profile page.
+
+
+
+
+
+
+Access Control Rules for Home Page:
+
+Authenticated users can access the home page to view personalized content, search for courses, and interact with notifications.
+Unauthenticated users (guests) cannot access the home page and are redirected to the login page.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access and view personalized content on the home page.
+Can search for courses and view search results.
+Can interact with notifications, mark them as read, and manage notification settings.
+Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the home page. Redirected to the login page.
+Now, let's outline the RBAC blueprint for the Home Page integration plan:
+
+RBAC Blueprint for Home Page:
+
+Access Control Rules:
+
+Authenticated users have access to the home page to view personalized content, search for courses, and interact with notifications.
+Unauthenticated users (guests) are not allowed to access the home page and are redirected to the login page.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Access and view personalized content on the home page.
+Search for courses and view search results.
+Interact with notifications, mark them as read, and manage notification settings.
+b. Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the home page. Redirected to the login page.
+
+
+
+
+
+
+
+
+Access Control Rules for Course List Page:
+
+Authenticated users can access the course list page to view available courses, search for specific courses, and filter courses based on different criteria.
+Unauthenticated users (guests) cannot access the course list page and are redirected to the login page.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access and view the course list page.
+Can search for courses and view search results.
+Can filter courses based on different criteria such as category, instructor, or rating.
+Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the course list page. Redirected to the login page.
+Now, let's outline the RBAC blueprint for the Course List Page integration plan:
+
+RBAC Blueprint for Course List Page:
+
+Access Control Rules:
+
+Authenticated users have access to the course list page to view available courses, search for specific courses, and filter courses based on different criteria.
+Unauthenticated users (guests) are not allowed to access the course list page and are redirected to the login page.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Access and view the course list page.
+Search for courses and view search results.
+Filter courses based on different criteria such as category, instructor, or rating.
+b. Unauthenticated Users:
+
+Role: Guest
+Permissions: No access to the course list page. Redirected to the login page.
+
+
+
+
+
+
+Access Control Rules for Course Details Page:
+
+Authenticated users can access the course details page to view information about the course, including its title, description, instructor, topics, and discussion forum.
+Only students who are enrolled in the course can see and interact with the "Enroll" button to enroll in the course.
+Teachers or course instructors have additional privileges, such as the ability to edit course details, add topics, and manage the discussion forum.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access and view the course details page.
+Can view information about the course, including its title, description, instructor, topics, and discussion forum.
+Cannot enroll in the course unless they are students enrolled in it.
+Students:
+
+Role: Student
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can enroll in the course by clicking the "Enroll" button if not already enrolled.
+Can view and participate in the discussion forum.
+Teachers:
+
+Role: Teacher
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can edit course details, including adding, removing, or modifying course materials and topics.
+Can manage the discussion forum, including creating new threads, replying to existing ones, and moderating discussions.
+RBAC Blueprint for Course Details Page:
+
+Access Control Rules:
+
+Authenticated users can access the course details page to view information about the course.
+Only enrolled students can enroll in the course by interacting with the "Enroll" button.
+Teachers have additional privileges, such as editing course details and managing the discussion forum.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions: Access and view course details page.
+b. Students:
+
+Role: Student
+Permissions: Inherits permissions from Authenticated Users role. Can enroll in the course and participate in the discussion forum.
+c. Teachers:
+
+Role: Teacher
+Permissions: Inherits permissions from Authenticated Users role. Can edit course details and manage the discussion forum.
+By following this RBAC blueprint, we ensure that users have appropriate access to course details based on their roles and permissions, maintaining proper access control and user privileges in the Django project.
+
+
+
+
+
+
+
+
+
+
+To integrate Role-Based Access Control (RBAC) into the Enrollment Page, we'll define the access control rules and roles/permissions for users accessing this page:
+
+Access Control Rules for Enrollment Page:
+
+Authenticated users can access the enrollment page to view available courses and enroll in them.
+Only students can enroll in courses.
+Teachers or administrators may have additional permissions, such as the ability to view course enrollment statistics or manage course enrollments.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access and view the enrollment page.
+Can view available courses and enroll in them if they are students.
+Students:
+
+Role: Student
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can enroll in courses displayed on the enrollment page.
+Teachers/Administrators:
+
+Role: Teacher/Administrator
+Permissions:
+Inherits permissions from Authenticated Users role.
+May have additional permissions, such as viewing course enrollment statistics or managing course enrollments.
+RBAC Blueprint for Enrollment Page:
+
+Access Control Rules:
+
+Authenticated users can access and view the enrollment page to enroll in courses.
+Only students can enroll in courses.
+Teachers or administrators may have additional permissions related to course management.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions: Access and view the enrollment page, enroll in courses.
+b. Students:
+
+Role: Student
+Permissions: Inherits permissions from Authenticated Users role. Can enroll in courses displayed on the enrollment page.
+c. Teachers/Administrators:
+
+Role: Teacher/Administrator
+Permissions: Inherits permissions from Authenticated Users role. May have additional permissions related to course management.
+By following this RBAC blueprint, we ensure that users have appropriate access to the enrollment page based on their roles and permissions, maintaining proper access control and user privileges in the Django project.
+
+
+
+
+
+
+
+
+
+
+Access Control Rules for Course Creation Page:
+
+Only authenticated users with the role of teacher or administrator can access the course creation page.
+Teachers have the ability to create and publish courses, while administrators may have additional permissions related to course management.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access the platform and view available courses.
+Cannot access the course creation page.
+Teachers:
+
+Role: Teacher
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can access and use the course creation page to create and publish courses.
+Administrators:
+
+Role: Administrator
+Permissions:
+Inherits permissions from Authenticated Users role.
+May have additional permissions, such as managing course categories, viewing course analytics, or moderating course content.
+RBAC Blueprint for Course Creation Page:
+
+Access Control Rules:
+
+Only authenticated users with the role of teacher or administrator can access the course creation page.
+Teachers can create and publish courses, while administrators may have additional permissions related to course management.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions: Can access the platform and view available courses. Cannot access the course creation page.
+b. Teachers:
+
+Role: Teacher
+Permissions: Inherits permissions from Authenticated Users role. Can access and use the course creation page to create and publish courses.
+c. Administrators:
+
+Role: Administrator
+Permissions: Inherits permissions from Authenticated Users role. May have additional permissions related to course management.
+
+
+
+
+
+
+
+
+
+
+Access Control Rules for Feedback Form Page:
+
+Only authenticated users with the role of student can access the feedback form page.
+Students have the ability to provide feedback on various aspects of the course.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access the platform and view available courses.
+Cannot access the feedback form page.
+Students:
+
+Role: Student
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can access and use the feedback form page to provide feedback on courses.
+RBAC Blueprint for Feedback Form Page:
+
+Access Control Rules:
+
+Only authenticated users with the role of student can access the feedback form page.
+Students can provide feedback on various aspects of the course using the form.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions: Can access the platform and view available courses. Cannot access the feedback form page.
+b. Students:
+
+Role: Student
+Permissions: Inherits permissions from Authenticated Users role. Can access and use the feedback form page to provide feedback on courses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Access Control Rules for Search Page:
+
+All authenticated users can access the search page.
+Teachers have additional filtering options to filter search results by students.
+Students have access to standard filtering options without the ability to filter by students.
+Roles and Permissions:
+
+Authenticated Users:
+
+Role: Authenticated
+Permissions:
+Can access the search page.
+Can use standard filtering options.
+Teachers:
+
+Role: Teacher
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can access additional filtering options to filter search results by students.
+Students:
+
+Role: Student
+Permissions:
+Inherits permissions from Authenticated Users role.
+Can access standard filtering options without the ability to filter by students.
+RBAC Blueprint for Search Page:
+
+Access Control Rules:
+
+All authenticated users can access the search page.
+Teachers have additional filtering options to filter search results by students.
+Students have access to standard filtering options without the ability to filter by students.
+Roles and Permissions:
+a. Authenticated Users:
+
+Role: Authenticated
+Permissions: Can access the search page and use standard filtering options.
+b. Teachers:
+
+Role: Teacher
+Permissions: Inherits permissions from Authenticated Users role. Can access additional filtering options to filter search results by students.
+c. Students:
+
+Role: Student
+Permissions: Inherits permissions from Authenticated Users role. Can access standard filtering options without the ability to filter by students.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Access Control Rules for Status Update Page:
+
+All authenticated users can access the status update page.
+Users can post status updates and view updates from their connections.
+Users can control the visibility of their status updates based on privacy settings.
+Roles and Permissions:
+
+Authenticated Users:
+Role: Authenticated
+Permissions:
+Can access the status update page.
+Can post status updates and view updates from connections.
+RBAC Blueprint for Status Update Page:
+
+Access Control Rules:
+
+All authenticated users can access the status update page.
+Users can post status updates and view updates from their connections.
+Users can control the visibility of their status updates based on privacy settings.
+Roles and Permissions:
+
+Authenticated Users:
+Role: Authenticated
+Permissions:
+Can access the status update page.
+Can post status updates and view updates from connections.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Integration Plan: Real-time Chat Page
+
+Header Section:
+
+User Profile Picture and Username:
+
+Display the user's profile picture and username for personalization.
+Use data from the PortalUser model to fetch user information.
+Navigation Links:
+
+Provide links to other sections of the user's profile for seamless navigation.
+Implement navigation links to relevant sections such as profile settings, courses, or forums.
+Main Content Area:
+
+Selected Chat Conversation:
+
+Display the selected chat conversation with the chosen contact.
+Render the chat conversation dynamically based on the selected contact.
+Chat Messages with Timestamps:
+
+Show chat messages along with timestamps to indicate when they were sent or received.
+Implement real-time updating of timestamps to reflect the latest message times.
+Input Field for Composing Messages:
+
+Provide an input field for users to compose and send messages.
+Enable real-time message sending and receiving functionality.
+Attachment Options:
+
+Allow users to attach files or multimedia content to their messages.
+Implement file upload functionality for attachments.
+Emoticons or Stickers:
+
+Include emoticons or stickers for users to express emotions during conversations.
+Provide a selection of emoticons or stickers for users to choose from.
+Sidebar:
+
+List of Online Contacts:
+
+Display a list of contacts who are currently online for users to initiate new conversations.
+Update the list of online contacts in real-time as users come online or go offline.
+Group Chats or Channels:
+
+If applicable, provide access to group chats or channels for collaborative discussions.
+Allow users to join or create group chats and channels.
+Footer:
+
+Copyright Information and Links:
+Include copyright information and relevant links in the footer section for legal compliance and additional resources.
+Ensure proper attribution and compliance with copyright laws.
+Additional Features:
+
+Topic-Based Chats:
+
+Allow users to create and join topic-based chat rooms or channels.
+Implement privacy settings for chat rooms (public or private) and allow users to set room descriptions.
+One-to-One Chats:
+
+Enable users to initiate one-to-one chats with other users directly.
+Designate private chat channels for one-to-one conversations to ensure privacy and confidentiality.
+Chat Button Integration:
+
+Integrate a "Chat" button on relevant pages such as the Course Page or User Profile Page.
+Allow users to access or initiate chats related to courses or interact with other users directly from their profiles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

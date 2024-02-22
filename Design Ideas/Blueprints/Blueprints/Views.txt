@@ -1,0 +1,60 @@
+User Authentication View
+
+Description: Handles user authentication, including login and logout.
+Purpose: Authenticate users with their credentials and log them in or out of their accounts.
+Response: Authentication status.
+Affected Components: User authentication, account management.
+User Registration View
+
+Description: Allows new users to register and create accounts.
+Purpose: Collect user registration data, validate input, and create user accounts.
+Response: Successful registration status or error messages.
+Affected Components: User registration, account creation.
+User Profile View
+
+Description: Retrieve and update user profile information.
+Purpose: Fetch user profile information and allow users to update their profile data.
+Response: User profile data or update status.
+Affected Components: User profiles, personalization.
+Courses View
+
+Description: Handles course-related operations, including listing, creating, and updating courses.
+Purpose: List available courses, allow teachers to create new courses, and update course details.
+Response: List of courses or creation/update status.
+Affected Components: Course management, course creation.
+Enrollments View
+
+Description: Manages student enrollments in courses.
+Purpose: Allow students to enroll in courses and provide the option to withdraw from courses.
+Response: Enrollment status.
+Affected Components: Course enrollment, user-course relationships.
+Course Materials View
+
+Description: Manages course materials, including uploading, listing, and downloading.
+Purpose: Allow teachers to upload course materials, list materials associated with courses, and enable users to download course materials.
+Response: List of materials or downloaded files.
+Affected Components: Course materials, teacher uploads.
+Feedback View
+
+Description: Allows students to leave feedback and ratings for courses.
+Purpose: Enable students to submit feedback for courses and allow users to retrieve course feedback.
+Response: Feedback data or submission status.
+Affected Components: Course improvement, feedback analysis.
+User Search View
+
+Description: Enables teachers to search for students and other teachers.
+Purpose: Implement search functionality with appropriate filters and provide search results based on criteria.
+Response: List of matching users or search results.
+Affected Components: User search, user interactions.
+Real-Time Chat View
+
+Description: Handles real-time chat functionality using WebSockets.
+Purpose: Implement real-time chat using Django Channels, manage sending and receiving real-time chat messages, and send notifications for chat activities.
+Response: Real-time chat messages and notifications.
+Affected Components: Real-time communication, user engagement.
+Course Search View
+
+Description: Enables users (teachers and students) to search for courses based on specific criteria.
+Purpose: Allow users to search for courses based on criteria such as course name, keywords, or teacher name and provide a list of matching courses.
+Response: List of matching courses or error messages.
+Affected Components: Course discovery, user interactions.

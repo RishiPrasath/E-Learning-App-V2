@@ -1,0 +1,29 @@
+Project Startup and Configuration Instructions: Provide detailed instructions on setting up the project, configuring development environments, and installing necessary dependencies.
+
+Packages to Install: List the required packages, libraries, and frameworks needed for your Django application.
+
+Tables: Outline the required tables/entities and their fields for your database schema.
+
+API Routes: Define the API routes and endpoints that your application will expose for communication.
+
+Templates: Describe the templates and UI elements required for the frontend of your application.
+
+Models: Provide information on the Django models that represent the data structures in your application.
+
+Views: Explain the views responsible for handling user requests and rendering responses.
+
+File Management Folder Structure: Define the folder structure and organization for managing your project's files, assets, and resources.
+
+Validators: Discuss any custom validators or validation rules used in your application to ensure data integrity.
+
+Socket Implementation: Explain how real-time communication with WebSockets is implemented in your project.
+
+Testing Strategy: Outline your approach to testing the application, including unit tests, integration tests, and testing tools.
+
+Database Schema Diagram: Include visual representations of your database schema to showcase table relationships.
+
+Deployment Instructions: Provide step-by-step instructions for deploying your Django application to a production environment.
+
+Security Practices: Detail the security measures and practices in place to protect your application from vulnerabilities.
+
+Documentation and Code Comments: Emphasize the importance of comprehensive code comments and documentation within your project.
