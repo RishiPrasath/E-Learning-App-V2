@@ -1,0 +1,100 @@
+/* Styling for the registration page */
+
+/* Header Section */
+.platform-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    background-color: #E1F0DA;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin-right: auto; /* Push the logo to the left */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Main Content Area */
+.registration-form {
+    padding: 50px;
+    max-width: 400px; /* Limit the width of the registration form */
+    margin: 0 auto; /* Center the registration form horizontally */
+}
+
+/* Styling for input */
+.text-input, select, input[type="file"] {
+    font-family: 'Lato', sans-serif;
+    font-weight: regular;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Reduce margin bottom for input fields */
+}
+
+/* Optional hint */
+.hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Adjust label margins */
+.input-label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* "Register" Button */
+.register-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.register-button:hover {
+    background-color: #45a049;
+}
+
+/* "Login" Link */
+.login-link {
+    text-align: center;
+}
+
+.login-link a {
+    color: blue;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

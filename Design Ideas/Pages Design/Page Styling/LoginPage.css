@@ -1,0 +1,109 @@
+.platform-title {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #333; /* Adjust color to fit your design */
+    margin: 0; /* Remove default margin */
+    padding: 20px;
+    /* Modernized font */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Apply color palette */
+
+.login-form {
+    width: 40%; /* Reduce the width of the form by 40% */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 50px 5%; /* Adjust padding to be 100px from top and bottom, and 5% from left and right */
+}
+
+.login-heading {
+    text-align: center; /* Center the heading */
+    
+    margin-bottom: 5px; /* Add some space between the heading and the form */
+}
+
+.login-button {
+
+    /* center the button */
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px; /* Add some space between the button and the form */
+    font-size: 20px; /* Adjust font size as needed */
+    /* bold */
+    font-weight: bold;
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #D4E7C5; /* Muted tone for error messages */
+    font-size: 14px; /* Adjust font size for better visibility */
+    display: none;
+}
+
+/* Navigation Bar */
+header {
+    background-color: #E1F0DA; /* Navbar color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Adjust color for navigation links */
+    font-weight: bold;
+}
+
+/* Typography */
+label, .forgot-password a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+/* styling for input */
+input[type="text"], input[type="password"] {
+    font-family: 'Lato', sans-serif;
+    font-weight: regular;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 60px; 
+}
+
+/* Error Handling */
+.error-message {
+    color: #D4E7C5; /* Muted tone for error messages */
+    font-size: 14px; /* Adjust font size for better visibility */
+    display: none;
+}
+
+.registration-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registration-link a {
+    color: blue;
+}
+
+.registration-link a:hover {
+    text-decoration: underline;
+}

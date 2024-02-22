@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Update Page</title>
+    <link rel="stylesheet" href="Page Styling/StatusUpdatePage.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="user-profile">
+            <img src="user-profile-picture.jpg" alt="User Profile Picture">
+            <span class="username">Username</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+        <button class="create-update-btn">Create New Status Update</button>
+    </header>
+    
+    <!-- Main Content Area -->
+    <main>
+        <section class="new-status-update">
+            <h2>New Status Update</h2>
+            <textarea placeholder="Write your status update here..."></textarea>
+            <input type="file" id="media-upload" accept="image/*, video/*">
+            <label for="media-upload">Attach Media</label>
+            <button class="post-update-btn">Post</button>
+        </section>
+        
+        <section class="recent-status-updates">
+            <h2>Recent Status Updates</h2>
+            <div class="status-update">
+                <div class="user-info">
+                    <img src="user1-profile-picture.jpg" alt="User 1 Profile Picture">
+                    <span class="username">User 1</span>
+                </div>
+                <p class="update-text">Just finished an amazing coding project! #codinglife</p>
+                <div class="interactions">
+                    <button class="like-btn">Like</button>
+                    <button class="comment-btn">Comment</button>
+                </div>
+            </div>
+            <div class="status-update">
+                <div class="user-info">
+                    <img src="user2-profile-picture.jpg" alt="User 2 Profile Picture">
+                    <span class="username">User 2</span>
+                </div>
+                <p class="update-text">Excited to start learning a new programming language today! #neverstoplearning</p>
+                <div class="interactions">
+                    <button class="like-btn">Like</button>
+                    <button class="comment-btn">Comment</button>
+                </div>
+            </div>
+            <!-- Add more status updates as needed -->
+        </section>
+        
+
+       
+
+
+    </main>
+    
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+        <!-- Add additional links or information here -->
+    </footer>
+</body>
+</html>

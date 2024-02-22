@@ -1,0 +1,100 @@
+/* Search Bar */
+.search-bar {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Search Results */
+.search-results {
+    margin: 20px;
+}
+
+.search-results h2 {
+    margin-bottom: 20px;
+}
+
+.filters,
+.sorting {
+    margin-bottom: 20px;
+}
+
+.filters h3,
+.sorting h3 {
+    margin-bottom: 10px;
+}
+
+.course-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+
+
+/* Navigation Bar */
+header {
+    background-color: #E1F0DA; /* Navbar color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Adjust color for navigation links */
+    font-weight: bold;
+}
+
+/* Apply color palette */
+.platform-title {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #333; /* Adjust color to fit your design */
+    margin: 0; /* Remove default margin */
+    padding: 20px;
+    /* Modernized font */
+    font-family: 'Roboto', sans-serif;
+}

@@ -1,0 +1,110 @@
+/* Navigation Bar */
+header {
+    background-color: #E1F0DA; /* Navbar color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Adjust color for navigation links */
+    font-weight: bold;
+}
+
+/* Apply color palette */
+.platform-title {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #333; /* Adjust color to fit your design */
+    margin: 0; /* Remove default margin */
+    padding: 20px;
+    /* Modernized font */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Course Listings */
+.course-listings {
+    margin: 20px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.sorting-options {
+    margin-bottom: 20px;
+}
+
+.sorting-options label {
+    margin-right: 10px;
+}
+
+/* Course Cards Grid */
+.course-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.course-card h3 {
+    color: #333333;
+}
+
+.course-card p {
+    margin: 10px 0;
+}
+
+.enroll-button {
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.enroll-button:hover {
+    background-color: #88a578; /* Darker shade on hover */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.user-profile {
+    margin-bottom: 20px;
+}
+
+.user-profile h2 {
+    margin-bottom: 10px;
+}

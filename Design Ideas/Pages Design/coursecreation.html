@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Creation Page</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="Page Styling/CourseCreationPage.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Logo -->
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav>
+            <!-- Navigation Links -->
+            <ul>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Course Creation Form -->
+        <section class="course-creation-form">
+            <h2>Create a New Course</h2>
+            <form>
+                <div class="form-group">
+                    <label for="course-title">Course Title:</label>
+                    <input type="text" id="course-title" name="course-title" placeholder="Enter course title" required>
+                </div>
+                <div class="form-group">
+                    <label for="course-description">Course Description:</label>
+                    <textarea id="course-description" name="course-description" placeholder="Enter course description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="course-subject">Subject:</label>
+                    <input type="text" id="course-subject" name="course-subject" placeholder="Enter course subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="course-materials">Upload Course Materials:</label>
+                    <input type="file" id="course-materials" name="course-materials" accept=".pdf,.doc,.docx" multiple>
+                </div>
+                <div class="form-group">
+                    <label for="enrollment-limits">Enrollment Limits:</label>
+                    <input type="number" id="enrollment-limits" name="enrollment-limits" min="1" required>
+                </div>
+                <!-- Add more form inputs for course settings as needed -->
+                <button type="submit" class="save-publish-button">Save and Publish</button>
+            </form>
+        </section>
+    </main>
+   
+    <footer>
+        <!-- Footer Content -->
+    </footer>
+</body>
+</html>

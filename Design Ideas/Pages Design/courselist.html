@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List Page</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="Page Styling/CourseListPage.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Logo -->
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav>
+            <!-- Navigation Links -->
+            <ul>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Search Bar -->
+        <section class="search-bar">
+            <input type="text" class="search-input" placeholder="Search for courses...">
+            <button class="search-button"><img src="search-icon.png" alt="Search"></button>
+        </section>
+        
+        <!-- Filters and Sorting Options -->
+        <section class="filters-sorting">
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option value="all">All</option>
+                <option value="programming">Programming</option>
+                <option value="design">Design</option>
+                <!-- Add more categories as needed -->
+            </select>
+            
+            <label for="sort">Sort By:</label>
+            <select name="sort" id="sort">
+                <option value="popularity">Popularity</option>
+                <option value="rating">Rating</option>
+                <option value="difficulty">Difficulty</option>
+                <!-- Add more sorting options as needed -->
+            </select>
+        </section>
+        
+        <!-- Course Cards -->
+        <section class="course-cards">
+            <!-- Course Card 1 -->
+            <div class="course-card">
+                <div class="placeholder-image"></div>
+                <h3>Course 1 Title</h3>
+                <p>Description of Course 1.</p>
+                <p>Instructor: John Doe</p>
+            </div>
+            
+            <!-- Course Card 2 -->
+            <div class="course-card">
+                <div class="placeholder-image"></div>
+                <h3>Course 2 Title</h3>
+                <p>Description of Course 2.</p>
+                <p>Instructor: Jane Smith</p>
+            </div>
+            
+            <!-- Course Card 3 -->
+            <div class="course-card">
+                <div class="placeholder-image"></div>
+                <h3>Course 3 Title</h3>
+                <p>Description of Course 3.</p>
+                <p>Instructor: Alex Johnson</p>
+            </div>
+            
+            <!-- Add more course cards as needed -->
+        </section>
+    </main>
+    <footer>
+        <!-- Footer Content -->
+    </footer>
+</body>
+</html>

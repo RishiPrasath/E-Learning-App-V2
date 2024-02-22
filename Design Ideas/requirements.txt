@@ -1,0 +1,10 @@
+
+django
+djangorestframework
+channels
+Pillow
+channels_redis  
+python-decouple
+psycopg2-binary
+requests
+django-redis
