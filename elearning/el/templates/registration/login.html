@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %} <link rel="stylesheet" href="{% static 'css/login.css' %}"> 
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="login-form">
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <h1>Login</h1> 
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }} 
+                <button type="submit" class="login-button">Login</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

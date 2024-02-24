@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from .models import PortalUser
 from django.core.exceptions import ValidationError
 from .validators import *
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
+
 class PortalUserCreationForm(UserCreationForm):
 
     username = forms.CharField(
@@ -11,9 +14,6 @@ class PortalUserCreationForm(UserCreationForm):
         label=_("Username"),
         validators=[validate_unique_username]
     )
-
-
-
     email = forms.EmailField(
         required=True, 
         label=_("Email"),
@@ -81,3 +81,29 @@ class PortalUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label="Username") 
+    password = forms.CharField(label="Password", widget=forms.PasswordInput) 
+
+    '''
+    Check if user exists in the PortalUser model
+
+    If not, Raise a validation error
+    '''
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+
+        print("Username: ", username)
+        print("Password: ", password)
+        if not PortalUser.objects.filter(username=username).exists():
+            print("User does not exist")
+            raise ValidationError(_("A user with that username does not exist."))
+        return username
+    
+
+

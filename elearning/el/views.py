@@ -1,10 +1,13 @@
 from django.http import JsonResponse
 from django.views.generic.edit import FormView
-from .forms import PortalUserCreationForm
+from .forms import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView as AuthLoginView
 from django.conf import settings
+from django.contrib.auth import authenticate
+import logging
+from django.urls import path
 
 def registration_page(request):
     if request.method == 'POST':
@@ -29,10 +32,13 @@ def registration_page(request):
         form = PortalUserCreationForm()
         return render(request, 'register.html', {'form': form})
 
-def login_page(request):
-    return render(request, 'login.html')
 
 
+
+
+
+def home_page(request):
+    return render(request, 'home.html')
 
 
 

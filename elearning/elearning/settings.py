@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'el'
+    'el',
+    'livereload',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'el.PortalUser'
+
+
+LOGIN_REDIRECT_URL = 'home'  # Replace 'home' with the name of your home view
+
+
+
+import os
+import logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
+
+logger = logging.getLogger(__name__)

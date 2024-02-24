@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Learning Platform{% endblock %}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">   
+</head>
+<body>
+
+
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="/">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+                    <li><a href="/profile/">User Profile</a></li> 
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="/search/">Search</a></li> 
+                        
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="/search/">Search</a></li> 
+                        <li><a href="/courses/create/">Course Creation</a></li> 
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Welcome Message -->
+        <section class="welcome-message">
+            <h2>Welcome back, User!</h2>
+            <p>Explore new courses, catch up on your studies, and stay up-to-date with the latest updates.</p>
+        </section>
+        
+        <!-- Search Bar -->
+        <section class="search-bar">
+            <input type="text" placeholder="Search for courses...">
+            <button>Search</button>
+        </section>
+        
+        <!-- Upcoming Deadlines -->
+        <section class="upcoming-deadlines">
+            <h2>Upcoming Deadlines</h2>
+            <ul>
+                <li>Assignment 1 - Due: 15th February</li>
+                <li>Quiz 2 - Due: 20th February</li>
+            </ul>
+        </section>
+        
+        <!-- Recent Course Updates -->
+        <section class="recent-course-updates">
+            <h2>Recent Course Updates</h2>
+            <ul>
+                <li><a href="#">Course 1</a> - Updated: 10th February</li>
+                <li><a href="#">Course 2</a> - Updated: 8th February</li>
+                <li><a href="#">Course 3</a> - Updated: 5th February</li>
+            </ul>
+        </section>
+        
+        <!-- Status Updates -->
+        <section class="status-updates">
+            <h2>Status Updates</h2>
+            <div class="status-feed">
+                <!-- Status update items -->
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nulla id ante congue, vel venenatis nunc pellentesque.</p>
+                <p>Sed quis ipsum sed lacus fermentum euismod. Fusce vel massa vel nisi vehicula gravida.</p>
+            </div>
+        </section>
+        
+        <!-- Course Recommendations -->
+        <section class="course-recommendations">
+            <h2>Course Recommendations</h2>
+            <div class="course-cards">
+                <!-- Course recommendation cards -->
+                <div class="course-card">
+                    <img src="course1.jpg" alt="Course 1 Thumbnail">
+                    <h3>Course 1</h3>
+                    <p>Description of Course 1.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course2.jpg" alt="Course 2 Thumbnail">
+                    <h3>Course 2</h3>
+                    <p>Description of Course 2.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course3.jpg" alt="Course 3 Thumbnail">
+                    <h3>Course 3</h3>
+                    <p>Description of Course 3.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course3.jpg" alt="Course 3 Thumbnail">
+                    <h3>Course 3</h3>
+                    <p>Description of Course 3.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course3.jpg" alt="Course 3 Thumbnail">
+                    <h3>Course 3</h3>
+                    <p>Description of Course 3.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course3.jpg" alt="Course 3 Thumbnail">
+                    <h3>Course 3</h3>
+                    <p>Description of Course 3.</p>
+                    <button>Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="course3.jpg" alt="Course 3 Thumbnail">
+                    <h3>Course 3</h3>
+                    <p>Description of Course 3.</p>
+                    <button>Enroll Now</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>
