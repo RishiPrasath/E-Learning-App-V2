@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <!-- Load static files -->
+    {% load static %}
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="registration-form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username" class="input-label">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email" class="input-label">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="id_password1" class="input-label">Password</label>
+                    {{ form.password1 }}  {% if form.password1.errors %}  <ul class="error-list">  {% for error in form.password1.errors %}
+                                <li class="error">{{ error }}</li>  {% endfor %}
+                        </ul>
+                    {% endif %} 
+                </div>
+                <div class="form-group">
+                    <label for="id_password2" class="input-label">Password Confirmation</label>
+                    {{ form.password2 }} 
+                    {% if form.password2.errors %}  
+                        <ul class="error-list">
+                            {% for error in form.password2.errors %}
+                                <li class="error">{{ error }}</li> 
+                            {% endfor %}
+                        </ul>
+                    {% endif %} 
+                </div>
+                <div class="form-group">
+                    <label for="id_user_type" class="input-label">User Type</label>
+                    {{ form.user_type }}
+                </div>
+                <div class="form-group">
+                    <label for="id_photo" class="input-label">Profile Picture</label>
+                    {{ form.photo }}
+                    <p class="hint">Optional: Upload a profile picture</p>
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>            
+            <div class="login-link">
+                <p>Already have an account? <a href="#">Login here</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
