@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List Page</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/search.css' %}"> 
+</head>
+<body>
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
+                        
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+
+    <!-- Page Content -->
+    <main>
+        <section class="search-bar">
+            <form action="{% url 'search_page' %}" method="GET">
+                <input type="text" name="q" class="search-input" placeholder="Search for courses or users...">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </section>
+
+        
+        <section class="search-results">
+            <h2>Search Results:</h2>
+            <div class="grid-container">
+                {% if teachers %}
+                    {% for teacher in teachers %}
+                        <div class="card">
+                            <a href="{% url 'userprofile' teacher.username %}">
+                                <h1>Teacher</h1>
+                                <h3>{{ teacher.username }}</h3>
+                                <p>{{ teacher.qualifications }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if courses %}
+                    {% for course in courses %}
+                        <div class="card">
+                            <a href="{% url 'coursedetails' course.id %}">
+                                <h1>Course</h1>
+                                <h3>{{ course.title }}</h3>
+                                <p>{{ course.description }}</p>
+                                <p>Instructor: {{ course.teacher.username }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if not teachers and not courses %}
+                    <p>No results found.</p>
+                {% endif %}
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- End Page Content  -->
+
+
+
+
+    <footer>
+    </footer>
+</body>
+</html>

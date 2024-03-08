@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Creation Page</title>
+    {% load static %}
+    <!-- Load coursecreation.css from static -->
+    <link rel="stylesheet" href="{% static 'css/coursecreation.css' %}">
+    <!--Load navbar.css  -->
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
+</head>
+<body>
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+                {% if user.is_authenticated %} 
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="/search/">Search</a></li> 
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="/search/">Search</a></li> 
+                    {% endif %}
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+  <main>
+    <section class="course-creation-form">
+      <h2>Create a New Course</h2>
+
+      <form method="POST" action="{% url 'create_course' %}"> 
+        {% csrf_token %} 
+
+        <div class="form-group">
+          <label for="course-title">Course Title:</label>
+          <input type="text" id="course-title" name="title" placeholder="Enter course title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="course-description">Course Description:</label>
+          <textarea id="course-description" name="description" placeholder="Enter course description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="course-subject">Subject:</label>
+          <input type="text" id="course-subject" name="subject" placeholder="Enter course subject" required>
+        </div>
+
+        <button type="submit" class="save-publish-button">Save and Publish</button>
+      </form> 
+
+    </section>
+  </main>
+  
+  <footer>
+      </footer>
+</body>
+</html>

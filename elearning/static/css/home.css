@@ -1,141 +1,52 @@
-/* Navigation Bar */
-header {
-    background-color: #E1F0DA; /* Navbar color */
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Base Styling for the main container */
+main {
+    padding: 20px;
 }
 
-nav ul {
-    list-style-type: none;
+/* Styling for notification sections */
+.status-updates-container, .course-notifications, .feedback-notifications, .notifications-container {
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6; /* Light grey border */
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+/* Section titles */
+.status-updates-container h1, .course-notifications h1, .feedback-notifications h2, .notifications-container h2 {
     margin: 0;
-    padding: 0;
+    padding: 10px 15px;
+    background-color: #9bfad6; /* Bootstrap primary blue */
+    color: white; /* White text */
+    border-radius: 7px 7px 0 0; /* Rounded corners on top */
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+/* Individual notifications */
+.course-notification, .status-update, .feedback-notification, .chat-group-notification {
+    background-color: white; /* White background for contrast */
+    padding: 10px 15px;
+    border-bottom: 1px solid #dee2e6; /* Light grey border between notifications */
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #000; /* Adjust color for navigation links */
-    font-weight: bold;
+/* Last child of each notification type to remove the bottom border */
+.course-notification:last-child, .status-update:last-child, .feedback-notification:last-child, .chat-group-notification:last-child {
+    border-bottom: none;
 }
 
-/* Apply color palette */
-.platform-title {
-    font-size: 24px; /* Adjust font size as needed */
-    font-weight: bold;
-    color: #333; /* Adjust color to fit your design */
+/* Notification message text */
+.course-notification p, .status-update p, .feedback-notification p, .chat-group-notification p {
     margin: 0; /* Remove default margin */
-    padding: 20px;
-    /* Modernized font */
-    font-family: 'Roboto', sans-serif;
+    color: #212529; /* Bootstrap's default dark */
 }
 
-/* Course Recommendations */
-.course-recommendations {
-    margin-bottom: 20px;
+/* Links within notifications for actions */
+.course-notification a, .status-update a, .feedback-notification a, .chat-group-notification a {
+    color: #007bff; /* Bootstrap primary blue for consistency */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500; /* Slightly bolder */
 }
 
-.course-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust minimum width and column count */
-    gap: 20px; /* Adjust gap between cards */
-}
-
-.course-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center; /* Center content */
-}
-
-.course-card img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.course-card h3 {
-    margin-bottom: 10px;
-}
-
-.course-card button {
-    background-color: #99BC85; /* Primary color */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Home Page */
-.homepage-content {
-    margin-top: 20px;
-}
-
-.welcome-message {
-    margin-bottom: 20px;
-}
-
-.upcoming-deadlines {
-    margin-bottom: 20px;
-}
-
-.recent-course-updates {
-    margin-bottom: 20px;
-}
-
-.status-updates {
-    margin-bottom: 20px;
-}
-
-/* Search Bar */
-.search-bar {
-    margin-bottom: 20px;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.search-button {
-    background-color: #99BC85; /* Primary color */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Notifications */
-.notifications {
-    margin-bottom: 20px;
-}
-
-.notification {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.notification button {
-    background-color: #FF6347; /* Red color */
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.notification button:hover {
-    background-color: #FF0000; /* Darker red color on hover */
+/* Hover effect for links */
+.course-notification a:hover, .status-update a:hover, .feedback-notification a:hover, .chat-group-notification a:hover {
+    text-decoration: underline; /* Add underline on hover for clarity */
 }

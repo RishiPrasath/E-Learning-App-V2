@@ -107,3 +107,75 @@ class LoginForm(AuthenticationForm):
     
 
 
+
+
+class StatusUpdateForm(forms.ModelForm):
+    class Meta:
+        model = StatusUpdate
+        fields = ['content']
+
+
+
+
+class CourseCreationForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['title', 'description', 'subject']
+
+    def clean(self):
+        cleaned_data = super().clean()  # This performs Django's default validation
+        for field_name in self.fields:
+            if not cleaned_data.get(field_name):  
+                raise forms.ValidationError(f"{field_name} is required.")
+        return cleaned_data
+
+
+
+
+
+
+class TopicCreationForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['name', 'description']  # Only include the desired fields
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # You can keep your validation logic as is
+        for field_name in self.fields:
+            if not cleaned_data.get(field_name):
+                raise forms.ValidationError(f"{field_name} is required.")
+
+        return cleaned_data
+    
+
+
+
+class CourseMaterialUploadForm(forms.ModelForm):
+    class Meta:
+        model = CourseMaterial
+        fields = ('title', 'file') 
+
+
+
+
+class ChatMessageForm(forms.ModelForm):
+    class Meta:
+        model = ChatMessage
+        fields = ['user', 'content']  # Include 'user' and 'content' fields
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Pop the 'user' argument from kwargs
+        super(ChatMessageForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['user'].initial = user  # Set the initial value for the 'user' field
+            self.fields['user'].widget = forms.HiddenInput()  # Hide the 'user' field in the form
+
+
+
+
+class ChatGroupForm(forms.ModelForm):
+    class Meta:
+        model = ChatGroup
+        fields = ['name', 'course', 'topic']

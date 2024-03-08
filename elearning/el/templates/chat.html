@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <!-- Add any additional CSS or scripts here -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+    <h1>Chat Page</h1>
+    <p>You are now on the chat page.</p>
+    <p>Course: {{ course.title }}</p>
+    <p>Topic: {{ topic.name }}</p>
+    <!-- Add chatgroup name here -->
+    <p>Chat Group: {{ chat_group.name }}</p>
+    <!-- Add mock design here -->
+    <main>
+        <section class="mock-design">
+            <!-- Your mock design code goes here -->
+            <div class="chat-header">
+                <h2>Chat with [Contact's Name]</h2>
+            </div>
+            <div class="chat-messages">
+                <div class="message user-message">
+                    MOCK USER MESSAGE 
+                </div>
+                <!-- More user messages can be added here -->
+                <div class="message other-message">
+                    Mock 'Others' Message
+                </div>
+            </div>
+        </section>
+        <!-- Add chat interface here -->
+        <section class="chat-interface">
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // Establish WebSocket connection
+        var socket = 'ws://' + window.location.host + '/ws/chat/{{ course.id }}/{{ topic.id }}/';
+        const chatSocket = new WebSocket(socket);
+    
+        // Log the messages sent by the chat_page view and display them
+        document.addEventListener('DOMContentLoaded', function () {
+
+            //Clear all children of the chat messages container
+            document.querySelector('.chat-messages').innerHTML = '';
+
+            // Retrieve the serialized messages from the chat interface
+            const serializedMessages = JSON.parse('{{ serialized_messages|safe }}');
+
+            // Iterate over the serialized messages and display them
+            serializedMessages.forEach(function (messageData) {
+                const messageContent = messageData.content;
+                const sender = messageData.user;
+                addMessage(messageContent, sender === '{{ request.user.username }}');
+            });
+        });
+            
+        // Handle received messages
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            const message = data.message;
+            const sender = data.username;
+            addMessage(message, sender === '{{ request.user.username }}');
+        };
+    
+        // Handle closed connections
+        chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+    
+        // Function to send messages
+        function sendMessage(message) {
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'username': '{{ request.user.username }}',
+                'course_id': '{{ course.id }}',
+                'topic_id': '{{ topic.id }}',
+                'chat_group_id': '{{ chat_group.id }}',
+            }));
+            addMessage(message, true);
+        }
+    
+        // Handle message submission
+        document.getElementById('message-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim(); // Trim whitespace
+            if (message !== '') {
+                sendMessage(message);
+                messageInput.value = '';
+            }
+        });
+    
+        // Function to add a message to the chat interface
+        function addMessage(message, isUserMessage) {
+            // Create a new message element
+            const messageElement = document.createElement('div');
+            messageElement.innerText = message;
+    
+            // Add appropriate class based on whether it's a user message or other message
+            if (isUserMessage) {
+                messageElement.classList.add('message', 'user-message');
+            } else {
+                messageElement.classList.add('message', 'other-message');
+            }
+    
+            // Append the message element to the chat messages container
+            document.querySelector('.chat-messages').appendChild(messageElement);
+        }
+    </script>
+</body>
+</html>

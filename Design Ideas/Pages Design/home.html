@@ -13,10 +13,30 @@
             <!-- Logo -->
             <h1 class="platform-title">E-Learning</h1>
         </div>
-        <nav>
-            <!-- Navigation Links -->
+        <nav> 
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="/search/">Search</a></li> 
+                        
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="/search/">Search</a></li> 
+                        <li><a href="/courses/create/">Course Creation</a></li> 
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+
             </ul>
         </nav>
         <div class="user-profile-picture">

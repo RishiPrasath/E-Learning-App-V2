@@ -1,0 +1,50 @@
+/* topiccreation.css */
+
+/* Overall Form Container */
+.topic-creation-container {
+    max-width: 600px; /* Adjust the width as needed */
+    margin: 30px auto;  /* Center the form */
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    border-radius: 5px;
+}
+
+/* Form Title */
+.topic-creation-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Example color, adjust to match your theme */
+}
+
+/* Form Fields */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px; 
+    font-weight: bold;
+} 
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Submit Button */
+.button {
+    background-color: #4CAF50; /* Example green color, change as needed */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}

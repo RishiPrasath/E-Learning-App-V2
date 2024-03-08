@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/home.css' %}">   
 </head>
-<body>
+<body data-user-id="{{ user.id }}">
 
 
     <header> 
@@ -17,125 +17,274 @@
         </div>
         <nav> 
             <ul>
-                <li><a href="/">Home</a></li>  
+                <li><a href="{% url 'home'%}">Home</a></li>  
 
                 {% if user.is_authenticated %} 
-                    <li><a href="/profile/">User Profile</a></li> 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                <li><a href="{% url 'post_status_update' %}">Status</a></li>
 
                     {% if user.user_type == 'student' %}  
                     <!-- Course List -->
-                    <li><a href="/courses/">Apply for Courses</a></li>    
-                    <li><a href="/search/">Search</a></li> 
+                    <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
                         
 
                     {% elif user.user_type == 'teacher' %}
-                        <li><a href="/search/">Search</a></li> 
-                        <li><a href="/courses/create/">Course Creation</a></li> 
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
                     {% endif %}
 
                 {% else %}  
                     <li><a href="/login/">Login</a></li> 
                     <li><a href="/register/">Register</a></li> 
+                    
                 {% endif %}
-
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- Welcome Message -->
-        <section class="welcome-message">
-            <h2>Welcome back, User!</h2>
-            <p>Explore new courses, catch up on your studies, and stay up-to-date with the latest updates.</p>
-        </section>
-        
-        <!-- Search Bar -->
-        <section class="search-bar">
-            <input type="text" placeholder="Search for courses...">
-            <button>Search</button>
-        </section>
-        
-        <!-- Upcoming Deadlines -->
-        <section class="upcoming-deadlines">
-            <h2>Upcoming Deadlines</h2>
-            <ul>
-                <li>Assignment 1 - Due: 15th February</li>
-                <li>Quiz 2 - Due: 20th February</li>
-            </ul>
-        </section>
-        
-        <!-- Recent Course Updates -->
-        <section class="recent-course-updates">
-            <h2>Recent Course Updates</h2>
-            <ul>
-                <li><a href="#">Course 1</a> - Updated: 10th February</li>
-                <li><a href="#">Course 2</a> - Updated: 8th February</li>
-                <li><a href="#">Course 3</a> - Updated: 5th February</li>
-            </ul>
-        </section>
-        
-        <!-- Status Updates -->
-        <section class="status-updates">
-            <h2>Status Updates</h2>
-            <div class="status-feed">
-                <!-- Status update items -->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nulla id ante congue, vel venenatis nunc pellentesque.</p>
-                <p>Sed quis ipsum sed lacus fermentum euismod. Fusce vel massa vel nisi vehicula gravida.</p>
+       <h1> Home Page </h1>
+
+        <div class="status-updates-container"> 
+            <h1>Status Updates</h1>
+            <div class="status-updates">
+                <!-- Status updates will be appended here by the handleStatusUpdates function -->
             </div>
-        </section>
-        
-        <!-- Course Recommendations -->
-        <section class="course-recommendations">
-            <h2>Course Recommendations</h2>
-            <div class="course-cards">
-                <!-- Course recommendation cards -->
-                <div class="course-card">
-                    <img src="course1.jpg" alt="Course 1 Thumbnail">
-                    <h3>Course 1</h3>
-                    <p>Description of Course 1.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course2.jpg" alt="Course 2 Thumbnail">
-                    <h3>Course 2</h3>
-                    <p>Description of Course 2.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course3.jpg" alt="Course 3 Thumbnail">
-                    <h3>Course 3</h3>
-                    <p>Description of Course 3.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course3.jpg" alt="Course 3 Thumbnail">
-                    <h3>Course 3</h3>
-                    <p>Description of Course 3.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course3.jpg" alt="Course 3 Thumbnail">
-                    <h3>Course 3</h3>
-                    <p>Description of Course 3.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course3.jpg" alt="Course 3 Thumbnail">
-                    <h3>Course 3</h3>
-                    <p>Description of Course 3.</p>
-                    <button>Enroll Now</button>
-                </div>
-                <div class="course-card">
-                    <img src="course3.jpg" alt="Course 3 Thumbnail">
-                    <h3>Course 3</h3>
-                    <p>Description of Course 3.</p>
-                    <button>Enroll Now</button>
-                </div>
+
+        </div>
+
+
+        <div class="course-notifications">
+            <h1>Courses</h1>
+            <div class="course-update">
+                <!-- Course updates will be appended here by the handleCourseUpdates function -->
             </div>
-        </section>
+        </div>
+
+        <div class="feedback-notifications">
+            <h2>Feedback Notifications</h2>
+            <!-- Feedback notifications will be appended here by the HandleFeedback function -->
+        </div>
+
+        <div class="notifications-container">
+            <h2>Chat Notifications</h2>
+            <!-- Chat group notifications will be appended here by the handleChatNotifications function -->
+        </div>
+
+
+
     </main>
 
     <footer>
     </footer>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8000/ws/notifications/');
+        const userId = document.body.getAttribute('data-user-id'); // Get the current user's ID from the body tag
+    
+        socket.onopen = function(event) {
+            console.log('WebSocket connection established.');
+        };
+    
+        socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+            // Check the type of notification and if the user is a recipient
+            if (data.notificationtype === 'Course Enrollment' && data.recipients.includes(parseInt(userId))) {
+                handleCourseEnrollmentUpdates(data);
+            } else if (data.notificationtype === 'Recent Status Update') {
+                handleStatusUpdates(data);
+            } else if (data.notificationtype === 'Courses' && data.recipients.includes(parseInt(userId))) {
+                handleCourseUpdates(data);
+            } else if (data.notificationtype === 'New Topic' && data.recipients.includes(parseInt(userId))) {
+                handleNewTopicNotification(data);
+            } else if (data.notificationtype === 'New Material' && data.recipients.includes(parseInt(userId))) {
+                HandleNewMaterial(data);
+            }else if (data.notificationtype === 'Removed Enrollment' && data.recipients.includes(parseInt(userId))) {
+                HandleRemoveEnrollment(data);
+            }else if (data.notificationtype === 'Feedback' && data.recipients.includes(parseInt(userId))) {
+                HandleFeedback(data);
+            }else if (data.type === 'notify' && data.recipients_ids.includes(parseInt(userId))) {
+                handleChatNotifications(data);
+            }
+            
+            else {
+                console.log('Received message:', data);
+            }
+        };
+    
+        socket.onclose = function(event) {
+            console.log('WebSocket connection closed.');
+        };
+    
+        function handleCourseUpdates(notification) {
+            console.log('Handling Course Update: ', notification);
+    
+            const courseContainer = document.querySelector('.course-notifications .course-update'); // Ensure the selector matches your HTML structure
+            const courseDiv = document.createElement('div');
+            courseDiv.classList.add('course-notification'); // Use a different class to avoid confusion with the container class
+    
+            const courseP = document.createElement('p');
+            courseP.textContent = notification.message;
+    
+            const courseLink = document.createElement('a');
+            courseLink.setAttribute('href', notification.redirectURL);
+            courseLink.textContent = 'View Course';
+    
+            courseDiv.appendChild(courseP);
+            courseDiv.appendChild(courseLink);
+    
+            courseContainer.appendChild(courseDiv);
+        }
+    
+        function handleStatusUpdates(notification) {
+            console.log('Handling Status Update: ', notification);
+    
+            const updatesContainer = document.querySelector('.status-updates');
+            const updateDiv = document.createElement('div');
+            updateDiv.classList.add('status-update');
+    
+            const messageP = document.createElement('p');
+            messageP.textContent = notification.message;
+    
+            const profileLink = document.createElement('a');
+            profileLink.setAttribute('href', notification.redirectURL);
+            profileLink.textContent = 'View Profile';
+    
+            updateDiv.appendChild(messageP);
+            updateDiv.appendChild(profileLink);
+    
+            updatesContainer.appendChild(updateDiv);
+        }
+    
+        function handleCourseEnrollmentUpdates(data) {
+            console.log('Handling Course Enrollment Update: ', data);
+            const notificationsContainer = document.querySelector('.course-notifications .course-update');
+            const notificationDiv = document.createElement('div');
+            notificationDiv.classList.add('course-notification');
+
+            const messageP = document.createElement('p');
+            messageP.textContent = data.message;
+
+            const courseLink = document.createElement('a');
+            courseLink.setAttribute('href', data.redirectURL);
+            courseLink.textContent = 'View Course';
+
+            notificationDiv.appendChild(messageP);
+            notificationDiv.appendChild(courseLink);
+
+            notificationsContainer.appendChild(notificationDiv);
+        }
+        
+        function handleNewTopicNotification(data) {
+            console.log('Handling New Topic Notification: ', data);
+            if (data.notificationtype === 'New Topic' && data.recipients.includes(parseInt(userId))) {
+                // Your logic for handling new topic notifications
+                const notificationsContainer = document.querySelector('.course-notifications .course-update');
+                const notificationDiv = document.createElement('div');
+                notificationDiv.classList.add('course-notification');
+
+                const messageP = document.createElement('p');
+                messageP.textContent = data.message;
+
+                const topicLink = document.createElement('a');
+                topicLink.setAttribute('href', data.redirectURL);
+                topicLink.textContent = 'View Topic';
+
+                notificationDiv.appendChild(messageP);
+                notificationDiv.appendChild(topicLink);
+
+                notificationsContainer.appendChild(notificationDiv);
+            }
+        }
+
+        function HandleNewMaterial(data) {
+            console.log('Handling New Material Notification: ', data);
+            if (data.notificationtype === 'New Material' && data.recipients.includes(parseInt(userId))) {
+                const notificationsContainer = document.querySelector('.status-updates'); // Adjust selector as needed
+                const notificationDiv = document.createElement('div');
+                notificationDiv.classList.add('new-material-notification');
+
+                const messageP = document.createElement('p');
+                messageP.textContent = data.message;
+
+                const materialLink = document.createElement('a');
+                materialLink.setAttribute('href', data.redirectURL);
+                materialLink.textContent = 'View Material';
+
+                notificationDiv.appendChild(messageP);
+                notificationDiv.appendChild(materialLink);
+
+                notificationsContainer.appendChild(notificationDiv);
+            }
+        }
+    
+        function HandleRemoveEnrollment(data) {
+            console.log('Handling Removed Enrollment Notification: ', data);
+            if (data.notificationtype === 'Removed Enrollment' && data.recipients.includes(parseInt(userId))) {
+                // Logic to display notification to the user
+                const notificationsContainer = document.querySelector('.status-updates'); // Use an existing or dedicated container for such messages
+                const notificationDiv = document.createElement('div');
+                notificationDiv.classList.add('removed-enrollment-notification');
+
+                const messageP = document.createElement('p');
+                messageP.textContent = data.message;
+
+                notificationDiv.appendChild(messageP);
+                notificationsContainer.appendChild(notificationDiv);
+            }
+        }
+    
+        function HandleFeedback(data) {
+            console.log('Handling Feedback Notification: ', data);
+            if (data.notificationtype === 'Feedback' && data.recipients.includes(parseInt(userId))) {
+                const notificationsContainer = document.querySelector('.feedback-notifications'); // Adjust selector as needed
+                const notificationDiv = document.createElement('div');
+                notificationDiv.classList.add('feedback-notification');
+
+                const messageP = document.createElement('p');
+                messageP.textContent = data.message;
+
+                const feedbackLink = document.createElement('a');
+                feedbackLink.setAttribute('href', data.redirectURL);
+                feedbackLink.textContent = 'View Feedback';
+
+                notificationDiv.appendChild(messageP);
+                notificationDiv.appendChild(feedbackLink);
+
+                notificationsContainer.appendChild(notificationDiv);
+            }
+        }    
+    
+        function handleChatNotifications(data) {
+            console.log('Handling Chat Group Notification: ', data);
+            // Example: Displaying the notification message. Adjust according to your page's structure.
+            const notificationsContainer = document.querySelector('.notifications-container'); // Make sure this selector exists
+            if (notificationsContainer) {
+                const notificationDiv = document.createElement('div');
+                notificationDiv.className = 'chat-group-notification';
+                
+                const messageText = `New message in chat group: ${data.chat_group_name}. ${data.message} - ${data.sender}`;
+                notificationDiv.textContent = messageText;
+                
+                notificationsContainer.appendChild(notificationDiv);
+            }
+        }
+
+
+    </script>
+
 </body>
 </html>

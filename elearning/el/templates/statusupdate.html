@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Update Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/statusupdate.css' %}">
+</head>
+<body>
+
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="/search/">Search</a></li> 
+                        
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="/search/">Search</a></li> 
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li>  
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="new-status-update">
+            <h2>New Status Update</h2>
+            <form method="POST" action="{% url 'post_status_update' %}"> 
+                {% csrf_token %}
+                <textarea name="content" placeholder="Write your status update here..."></textarea>
+                <button type="submit" class="post-update-btn">Post</button>
+            </form>
+            {% if messages %}
+                <div class="messages"> 
+                    {% for message in messages %}
+                        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="current-status">
+            {% if status %} 
+                <h2>Your Current Status:</h2>
+                <div class="status-update">
+                    <div class="user-info"> 
+                        <span class="username">{{ status.user.username }}</span> {{ status.timestamp }}
+                    </div>
+                    <p class="update-text">{{ status.content }}</p>
+                </div>
+            {% else %}
+                <p>You haven't posted a status update yet.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

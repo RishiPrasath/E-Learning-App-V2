@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+select,
+textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #1f9e69;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0a6932;
+}
+
+.star-rating {
+    display: inline-block;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.star-rating label:before {
+    content: "\2605";
+    font-size: 2em;
+    color: #ccc;  /* Default color */
+}
+
+.star-rating input[type="radio"]:checked ~ label:before {
+    color: gold;
+}
+
+.star-rating label:hover:before,
+.star-rating label:hover ~ label:before {
+    color: gold;  /* Highlight stars on hover */
+}

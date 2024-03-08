@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Topic</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/topiccreation.css' %}"> 
+</head>
+<body>
+    <div class="topic-creation-container">
+        <h1>Create Topic for {{ course.title }}</h1>
+        <form method="POST">
+            {% csrf_token %} 
+            {{ topic_form.course_id.as_hidden }}
+            <div class="form-group">
+                <label for="id_name">Topic Name:</label>
+                {{ topic_form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                {{ topic_form.description }}
+            </div>
+            <button type="submit" class="button">Create Topic</button>
+        </form>      
+    </div>
+</body>
+</html>

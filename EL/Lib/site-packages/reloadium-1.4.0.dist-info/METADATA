@@ -1,0 +1,152 @@
+Metadata-Version: 2.1
+Name: reloadium
+Version: 1.4.0
+Summary: Hot reloader aka edit and continue for Python
+Home-page: https://github.com/reloadware/reloadium
+Author: Reloadware
+Author-email: damian@reloadware.com
+Requires-Python: >=3.7.0,<4.0
+Description-Content-Type: text/x-rst
+
+
+
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/logo.png
+    :width: 400
+    :alt: Logo
+    :align: center
+
+|
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/example_small.gif
+    :width: 900
+    :alt: Example
+    :align: center
+
+
+
+
+
+
+Details
+#######
+
+
+
+| Reloadium adds hot reloading, profiling and AI features to your IDE
+
+
+Installing
+##########
+
+| If you are a PyCharm user please check out `Reloadium plugin <https://plugins.jetbrains.com/plugin/18509-reloadium>`_
+| Plugins for other IDEs are coming soon.
+
+| Reloadium can be also used as a standalone library by installing it manually with pip:
+
+.. code-block:: console
+
+   pip install reloadium
+
+
+Using
+#####
+
+Running python files:
+
+
+.. code-block:: console
+
+   reloadium run example.py
+
+Running modules:
+
+.. code-block:: console
+
+   reloadium run -m my_module
+
+
+| To apply your changes simply save a file
+
+
+AI
+######
+
+| Reloadium integrates with ChatGpt seamlessly providing additional context to your conversations resulting in much better replies.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/chatgpt_fix.gif
+    :width: 700
+    :alt: ChatGpt
+
+
+General Python Features
+#######################
+
+| When altered, Reloadium will execute the current function again, providing developers with immediate feedback on the functionality of their code.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/frame_reloading.gif
+    :width: 700
+    :alt: Frame Reloading
+
+
+| Reloadium manages errors that occur while reloading functions, allowing you to correct any mistakes seamlessly.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/fixing_errors.gif
+    :width: 700
+    :alt: Frame Reloading
+
+
+| Reloadium has the ability to refresh files throughout the entire project by tracking dependencies.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/multi_file_reloading.gif
+    :width: 700
+    :alt: Frame Reloading
+
+
+Django
+######
+
+| Upon saving, Reloadium performs hot reloading of views and automatically refreshes the page.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/django_page_refreshing.gif
+    :width: 700
+    :alt: Page Refreshing
+
+
+| To avoid generating undesired objects after reloading the current function, Reloadium reverts any database modifications.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/django_rolling_back.gif
+    :width: 700
+    :alt: Rolling back db
+
+
+Flask
+#####
+
+| Reloadium hot reloads Flask apps and automatically refreshes the page upon saving. 
+| This enables real-time content updates, significantly streamlining web development.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/flask.gif
+    :width: 700
+    :alt: Flask
+
+
+
+SqlAlchemy
+##########
+
+| Reloadium will rollback database changes to prevent creating unwanted objects after reloading current function.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/sqlalchemy.gif
+    :width: 700
+    :alt: SqlAlchemy
+
+
+Pandas
+##########
+
+| Reloadium facilitates hot reloading of Pandas objects, making the manipulation of intricate dataframes for data science remarkably simple.
+
+.. image:: https://raw.githubusercontent.com/reloadware/reloadium/main/media/pandas.gif
+    :width: 700
+    :alt: Pandas

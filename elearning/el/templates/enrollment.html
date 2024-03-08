@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/enrollment.css' %}">  
+</head>
+
+
+<body>
+    <header>
+        <div class="logo">
+            <!-- Logo -->
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+    
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+    
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="/search/">Search</a></li> 
+                        
+    
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="/search/">Search</a></li> 
+                        <li><a href="/courses/create/">Course Creation</a></li> 
+                    {% endif %}
+    
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+    
+            </ul>
+        </nav>
+    </header>
+    <main>
+    
+    <section class="search-and-sort">
+
+        <!-- Search Bar -->
+
+        <div class="search-and-sort">
+            <div class="search-bar">
+                <form method="GET" id="searchForm"> 
+                    <input type="text" class="search-input" placeholder="Search courses..." name="search">
+                    <button class="search-button" type="submit">Search</button> 
+                </form>
+            </div>    
+        </div>
+
+
+        
+    </section>
+
+    <div class="course-listings">
+        {% for course in courses %}
+        <div class="course-card">
+            <span class="course-id" style="display: none;">{{ course.id }}</span>  
+            <h3>{{ course.title }}</h3>
+            <p>Instructor: {{ course.teacher.username }}</p>
+            <p>{{ course.description | truncatewords:15 }}...</p> 
+            {% if course in enrollments.course_set.all %}
+            <a href="{% url 'coursedetails' course_id=course.id %}">
+                <button class="enroll-button enrolled">View Course</button>
+            </a>
+            {% else %}
+            <a href="{% url 'enroll' course_id=course.id %}">
+                <button class="enroll-button">Enroll</button>
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        var enrollmentsData = JSON.parse('{{ enrollments_json | safe }}'); // Parse the JSON data
+      
+        function updateEnrollButtons() {
+          var courseCards = document.querySelectorAll('.course-card');
+      
+          courseCards.forEach(card => {
+            var courseId = card.querySelector('.course-id').textContent; // Get course ID
+            var enrollButton = card.querySelector('.enroll-button');
+      
+            if (enrollmentsData.some(e => e.courseId == courseId)) {
+              // Enrolled
+              enrollButton.textContent = 'View Course';
+              enrollButton.classList.add('enrolled'); 
+              // Update the link within the <a> tag as well
+            }
+          });
+        }
+      
+        window.addEventListener('load', updateEnrollButtons); // Call the function after the page loads
+    
+        
+    </script>
+</main>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{course.title}}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/coursedetails.css' %}"> 
+</head>
+<header> 
+    <div class="logo">
+        <h1 class="platform-title">E-Learning</h1>
+    </div>
+    <nav> 
+        <ul>
+            <li><a href="{% url 'home'%}">Home</a></li>  
+
+            {% if user.is_authenticated %} 
+           
+            <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+            <li><a href="{% url 'post_status_update' %}">Status</a></li>
+
+                {% if user.user_type == 'student' %}  
+                <!-- Course List -->
+                <li><a href="/courses/">Apply for Courses</a></li>    
+                <li><a href="{% url 'search_page' %}">Search</a></li> 
+                    
+
+                {% elif user.user_type == 'teacher' %}
+                    <li><a href="{% url 'search_page' %}">Search</a></li>  
+                    <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                {% endif %}
+
+            {% else %}  
+                <li><a href="/login/">Login</a></li> 
+                <li><a href="/register/">Register</a></li> 
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <div class="course-details-container"> 
+        <div class="course-header">
+             <h1>{{course.title}}</h1> 
+             <p class="course-description">{{course.description}}</p>
+        </div>
+
+        <div class="instructor-description">
+            <h2>Instructor</h2>
+            <p>{{course.instructor}}</p>
+            <div class="instructor-info">
+                <img src="{% static 'images/placeholder_profile.svg' %}" alt="Instructor Photo" class="instructor-photo">
+                <a href="instructor_profile.html" class="instructor-name">{{course.teacher.username}}</a>
+            </div>
+            <h2>Qualifications</h2>
+            <p>{{course.teacher.qualifications}}</p>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated and request.user.is_teacher %}
+    <div class="enrolled-students">
+        <h1>Enrolled Students</h1>
+        <ul class="student-list"> 
+            {% for enrollment in enrolled_students %} 
+            <li>
+                <a href="{% url 'userprofile' enrollment.student.username %}">{{ enrollment.student.username }}</a> 
+                {% if request.user == course.teacher %} 
+                <a href="{% url 'remove_enrollment' enrollment.id %}">
+                    <button class="remove-button">Remove</button> 
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if request.user.is_authenticated and request.user.is_teacher %}  
+    <button class="addbutton" id="addTopicButton" onclick="location.href='{% url 'create_topic' course.id %}';">Add Topic</button> 
+    {% endif %}
+
+    <div class="topics-container"> 
+        {% for topic in course.topics.all %} 
+            <div class="topic-card expanded" id="topic-card-{{ topic.id }}"> 
+                <div class="topic-header"> 
+                    <h2>{{ topic.name }}</h2>
+                    <p>{{ topic.description }}</p>
+                </div>
+                
+                <div class="course-material-list" id="material-list-topic-{{ topic.id }}">
+                    {% for material in topic.materials.all %}
+                    <div class="file-container">
+                        <div class="file-icon"></div>
+                        <div class="file-name">
+                            <!-- Use material.file.url to generate the correct relative file path -->
+                            <a href="{{ material.file.url }}" target="_blank">{{ material.title }}</a>
+                        </div>
+                        
+                        <!-- Download Button-->
+                        <a href="{% url 'download_material' material.id %}" class="button button-download">Download</a>
+                
+                        <!-- Delete File Button -->
+                        {% if request.user.is_authenticated and request.user.is_teacher %}
+                        <form action="{% url 'delete_file' %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this file?')">
+                            {% csrf_token %}
+                            <input type="hidden" name="course_id" value="{{ course.id }}">
+                            <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                            <input type="hidden" name="material_id" value="{{ material.id }}">
+                            <button type="submit" class="button button-delete">Delete</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                <div class="topic-actions">
+                    
+                    <!-- Chat button -->
+                    
+                    <a href="{% url 'chat_page' course.id topic.id %}" class="button button-chat">Chat</a>
+                    
+                    
+                    {% if request.user.is_authenticated and request.user.is_teacher %}
+                    <button class="button button-upload" onclick="handleFileUpload({{ topic.id }});">Upload File</button>
+                        
+                    </button>
+
+
+                    <div class="topic-deletebutton">
+                        <form action="{% url 'delete_topic' course.id topic.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this topic?')">
+                            {% csrf_token %}
+                            <button type="submit" class="button button-delete">Delete Topic</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    
+                </div> 
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function handleFileUpload(topicId) {
+            let fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = ".pdf, .docx, image/*";
+            fileInput.onchange = function(event) {
+                let selectedFile = fileInput.files[0];
+                let formData = new FormData();
+                formData.append('file', selectedFile, selectedFile.name);
+    
+                let csrfToken = getCsrfToken(); // Call the function to get CSRF token
+                let uploadUrl = `/courses/{{ course.id }}/topics/${topicId}/upload/`;
+    
+                console.log("Uploading file to", uploadUrl);
+    
+                fetch(uploadUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': csrfToken // Include CSRF token in headers
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        console.log("File uploaded successfully:", data);
+
+                        // Print all fields from the response
+                        for (let key in data) {
+                            console.log(key, ":", data[key]);
+                        }
+
+
+                        // Add new file container to the course-material-list
+                        let materialList = document.getElementById(`material-list-topic-${topicId}`);
+                        let newFileContainer = document.createElement('div');
+                        newFileContainer.classList.add('file-container');
+                        
+                        
+                        htmlString = `
+                            <div class="file-container">
+                                <div class="file-icon"></div>
+                                <div class="file-name"><a href="${data.file_url}" target="_blank">${selectedFile.name}</a></div>
+                                
+                                <!-- Download Button-->
+                                <a href="${data.file_url}" download="${selectedFile.name}" class="button button-download">Download</a>
+
+                                <!-- Delete File Button -->
+                                <form action="{% url 'delete_file' %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this file?')">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="course_id" value="${data.course_id}">
+                                    <input type="hidden" name="topic_id" value="${data.topic_id}">
+                                    <input type="hidden" name="material_id" value="${data.material_id}">
+                                    <button type="submit" class="button button-delete">Delete</button>
+                                </form>
+                            </div>
+                        `;
+                        
+                        
+                        console.log(htmlString);
+                        
+                        
+                        
+                        newFileContainer.innerHTML = htmlString
+                        materialList.appendChild(newFileContainer);
+    
+                        // Provide feedback to the user (e.g., UI message)
+                    } else {
+                        console.error("Upload failed:", data.message);
+    
+                        // Provide feedback to the user (e.g., UI message)
+                    }
+                })
+                .catch(error => {
+                    console.error("Error during upload:", error);
+    
+                    // Provide feedback to the user (e.g., UI message)
+                });
+            };
+    
+            fileInput.click(); // Trigger the file input dialog
+        }
+    
+        // Function to get CSRF token from cookies
+        function getCsrfToken() {
+            return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+        }
+    </script>
+    
+</body>
+</html>

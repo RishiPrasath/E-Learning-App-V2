@@ -1,0 +1,111 @@
+/* Navigation Bar */
+header {
+    background-color: #E1F0DA; /* Navbar color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Adjust color for navigation links */
+    font-weight: bold;
+}
+
+/* Apply color palette */
+.platform-title {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #333; /* Adjust color to fit your design */
+    margin: 0; /* Remove default margin */
+    padding: 20px;
+    /* Modernized font */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Search Bar */
+.search-bar {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.search-input {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    margin-right: -4px; /* Adjust for border */
+}
+
+.search-button {
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border: 1px solid #99BC85; /* Matching border color */
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.search-button:hover {
+    background-color: #88a578; /* Darker shade on hover */
+}
+
+/* Filters and Sorting Options */
+.filters-sorting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filters-sorting label, .filters-sorting select {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333; /* Adjusted color */
+}
+
+/* Course Cards */
+.course-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 20px; /* Horizontal padding for cards */
+}
+
+.course-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #E1F0DA; /* Lightest shade for background */
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 150px;
+    background-color: #000; /* Black placeholder background */
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.course-card h3 {
+    margin-bottom: 10px;
+    color: #333; /* Adjusted color */
+}

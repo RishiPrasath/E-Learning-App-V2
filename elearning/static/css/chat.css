@@ -1,0 +1,96 @@
+/* Navigation Bar */
+header {
+    background-color: #E1F0DA; /* Navbar color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Adjust color for navigation links */
+    font-weight: bold;
+}
+
+/* Chat Interface */
+.chat-interface {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    padding: 10px 0;
+}
+
+.chat-header h2 {
+    margin: 0;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    margin-top: 20px;
+    overflow-y: auto; /* Allows scrolling for overflow */
+}
+
+/* User's Messages */
+.user-message { 
+    background-color: #DCF8C6; /* Light green-ish tint */
+    align-self: flex-start;  /* Push to the left */
+    max-width: 40%; /* Limit message width to prevent overly long lines */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+/* Other's Messages */
+.other-message { 
+    background-color: #fff; /* White background for messages from others */
+    align-self: flex-end; /* Push to the right */
+    max-width: 40%; /* Limit message width */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-messages, .user-message, .other-message {
+        max-width: 75%; /* Allow messages to take more space on smaller screens */
+    }
+}
+
+/* Animations for Incoming Messages */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message {
+    animation: slideIn 0.5s ease-out;
+}

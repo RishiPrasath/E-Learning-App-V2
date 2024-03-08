@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{ user.username }}</title> 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/userprofile.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+    <header> 
+
+        
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="/courses/">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="{% url 'search_page' %}">Search</a></li> 
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li>  
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                {% endif %}
+
+            </ul>
+        </nav>
+
+
+    </header>
+
+    <main>
+        <section class="user-information">
+            <h2>User Information</h2>
+            <section class="profile-picture-section">
+                <div class="user-profile-picture">
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" alt="Profile Photo"> 
+                    {% else %}
+                        <img src="{% static 'images/placeholder_profile.svg' %}" alt="Placeholder Profile Photo">
+                    {% endif %}
+                </div>
+            </section>
+
+            <p>Bio: </p> 
+            {% if is_owner %}
+                <form method="POST" action="{% url 'update_bio' %}"> 
+                    {% csrf_token %} 
+                    <textarea name="bio" id="bio_field">{{ user.bio | default:"" }}</textarea> 
+                    <input type="hidden" name="field_name" value="bio" />
+                    <input type="hidden" name="username" value="{{ user.username }}"> <button type="submit">Update Bio</button>
+                </form>
+            {% else %}
+                {{ user.bio | default:"This user has not added a bio yet." }} 
+            {% endif %}
+
+            <p>Qualifications: </p>
+            {% if is_owner %}
+                <form method="POST" action="{% url 'update_qualifications' %}">
+                    {% csrf_token %}
+                    <textarea name="qualifications" id="qualifications_field">{{ user.qualifications | default:"" }}</textarea> 
+                    <input type="hidden" name="field_name" value="qualifications" />
+                    <input type="hidden" name="username" value="{{ user.username }}"> <button type="submit">Update Qualifications</button>
+                </form>
+            {% else %}
+                {{ user.qualifications | default:"" }} 
+            {% endif %}
+
+            <p>Contact Information: {{ user.email }}</p>
+
+        </section>
+
+        <!-- User's current status -->
+        <section class="user-status">
+            <div class="current-status">
+                <h2>Current Status</h2>
+                <p>{{ latest_status.content | default:"This user has not added a status yet." }}</p>
+            </div>
+            <div class="status-date-time">
+                <p>{{ latest_status.timestamp | date:"F j, Y, g:i a" }}</p>
+            </div>
+        </section>
+
+
+        <!-- Display courses taught by the user if they are a teacher -->
+        {% if user.is_teacher and courses_taught %}
+        <h3>Courses Taught</h3>
+        <ul class="course-list">
+            {% for course in courses_taught %}
+            <li>{{ course.title }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- Display courses enrolled in by the user if they are a student -->
+        {% if user.is_student and courses_enrolled %}
+        <h3>Courses Enrolled</h3>
+        <ul class="course-list">
+            {% for course in courses_enrolled %}
+            <li>{{ course.title }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} 
+
+
+ 
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </main>     
+</body>
+</html>

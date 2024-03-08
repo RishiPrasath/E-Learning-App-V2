@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +43,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'el',
     'livereload',
+    'django_extensions',
+    'channels',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -70,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'elearning.wsgi.application'
+WSGI_APPLICATION = 'elearning.asgi.application'
 
 
 # Database
@@ -127,8 +134,15 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    
 ]
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files (Uploaded content)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -140,7 +154,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'el.PortalUser'
 
 
-LOGIN_REDIRECT_URL = 'home'  # Replace 'home' with the name of your home view
+LOGIN_REDIRECT_URL = 'home'  
+
+LOGOUT_REDIRECT_URL = 'login'
 
 
 
@@ -158,9 +174,20 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': 'INFO',
         },
     },
 }
 
 logger = logging.getLogger(__name__)
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        
+    },
+}
+
+
+ASGI_APPLICATION = 'elearning.asgi.application'

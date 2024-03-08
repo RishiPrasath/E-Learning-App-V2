@@ -1,0 +1,214 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: white;
+}
+
+/* Course Header */
+.course-header {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+.course-header h1 {
+    font-size: 2.5em; 
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.course-description {
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #555; 
+}
+
+.instructor-info {
+    display: flex; /* Align photo and name horizontally */
+    align-items: center;
+    margin-top: 15px;
+}
+
+.instructor-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular shape */
+    margin-right: 10px;
+}
+
+.instructor-name {
+    text-decoration: none; 
+    color: #333; 
+}
+
+.instructor-name:hover {
+    text-decoration: underline; 
+}
+
+/* Course Details Layout */
+.course-details-container {
+    display: flex; /* Arrange the header and description horizontally */
+    gap: 20px;   /* Spacing between the two sections */
+}
+
+.course-header {
+    flex: 1; /* Allow the course-header to grow and take up space*/
+}
+
+.instructor-description {
+    flex: 1; /* Allow the instructor-description to grow and take up space */
+    background-color: white;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Enrolled Students Section */
+.enrolled-students {
+    background-color: #f0f0f0;  /* Light background for visual separation */
+    border: 1px solid #ddd;     /* Subtle border */
+    border-radius: 5px;
+    margin-top: 20px; 
+    padding: 20px; 
+}
+
+.enrolled-students-header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd; /* Bottom border to separate header */
+    margin-bottom: 15px;
+}
+
+.enrolled-students-header h3 {
+    font-weight: 600;  /* Slightly bolder heading */
+}
+
+.expand-collapse-icon {
+    transition: transform 0.2s ease; 
+}
+
+.student-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px; 
+}
+
+.student-list li {
+    display: flex;         /* Place student name and button side-by-side */
+    align-items: center;   /* Vertically align them */
+    justify-content: space-between;
+    margin-bottom: 10px;   /* More spacing between list items */
+}
+
+.student-list li a { 
+    color: #337ab7;      /* A typical link blue */
+    text-decoration: none;   
+}
+
+.student-list li a:hover {
+    text-decoration: underline;  
+}
+
+.remove-button {
+    background-color: #d9534f;  /* Red, but slightly less harsh */
+    border: none;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+/* Topics */
+.addbutton{
+    /* basic button styling */
+    background-color: #136633;
+    margin: 30px;
+    color: white;
+    width: 100px;
+    height: 70px;
+    align-content: center;
+}
+
+.topic-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px; /* Adjusted padding */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.topic-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px; 
+}
+
+.topic-description {
+    margin-bottom: 15px;
+} 
+
+.topic-actions {
+    display: flex; /* Arrange buttons horizontally */
+    align-items: center;
+}
+
+.button {
+    text-decoration: none;
+    color: white;
+    border: none;
+    margin: 10px; /* Adjust as needed */
+    padding: 8px 12px; /* Reduced padding */
+    width: auto;  /* Allow the button's width to fit its content */
+    height: auto;  /* Allow the button's height to fit its content */
+    border-radius: 3px;
+    font-size: 0.9em; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}  
+
+.button-chat { background-color: #b4f0f0; } 
+.button-download { 
+    background-color:  #5cb85c; 
+    margin: 0 10px; /* Adjusted margin */
+} 
+.button-upload {
+    z-index: 100; /* A high z-index to test */
+    pointer-events: auto; 
+    opacity: 1;
+    background-color: #136633;
+}
+.button-delete { 
+    background-color: #d9534f; 
+} 
+
+/* File Container Styling */
+.file-container {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+    background-color: #ffffff;
+    /* add a shadow to the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.file-icon {
+    width: 30px; 
+    height: 30px; 
+    overflow: hidden;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px; /* Adding a bit of spacing between icon and name */
+}
+
+.file-name {
+    /* white-space: nowrap;  */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    max-width: 150px; 
+    margin-bottom: 20px; /* Adjust spacing as needed */
+}

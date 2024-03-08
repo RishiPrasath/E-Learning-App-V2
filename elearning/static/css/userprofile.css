@@ -1,0 +1,168 @@
+/* User Information */
+.user-information {
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.user-information h2 {
+    color: #333; /* Dark text color */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.user-profile-picture {
+    width: 150px; /* Adjust width as needed */
+    height: 150px; /* Adjust height as needed */
+    margin-bottom: 20px; /* Add margin to separate from content */
+    border-radius: 50%; /* Make the image round */
+    overflow: hidden; /* Hide any overflow to maintain round shape */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.user-profile-picture img {
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.bio, .qualifications {
+    margin-bottom: 20px;
+}
+
+.bio textarea, .qualifications textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.bio textarea:focus, .qualifications textarea:focus {
+    outline: none;
+    border-color: #99BC85; /* Change border color on focus */
+}
+
+.bio button, .qualifications button {
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bio button:hover, .qualifications button:hover {
+    background-color: #88a97d; /* Darker shade on hover */
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    color: #555; /* Medium dark text color */
+    font-size: 16px;
+}
+
+/* Edit Profile button */
+.edit-profile-button {
+    background-color: #99BC85; /* Primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.enrolled-courses ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.enrolled-courses ul li {
+    margin-bottom: 10px;
+}
+
+.account-settings ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.account-settings ul li {
+    margin-bottom: 10px;
+}
+
+.delete-account-button {
+    background-color: #FF6347; /* Red color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.delete-account-button:hover {
+    background-color: #FF0000; /* Darker red color on hover */
+}
+
+/* User's Current Status */
+.user-status {
+    background-color: #ffffff; /* Light background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    border: #000;
+}
+
+.current-status {
+    margin-bottom: 15px;
+}
+
+.current-status h2 {
+    color: #333; /* Dark text color */
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.current-status p {
+    color: #555; /* Medium dark text color */
+    font-size: 16px;
+}
+
+.status-date-time p {
+    color: #888; /* Lighter text color for timestamp */
+    font-size: 14px;
+}
+
+
+
+
+* User Information */
+.user-information {
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.user-information h2 {
+    color: #333; /* Dark text color */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.course-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.course-list li {
+    background-color: #eaf7e9; /* Light green background color */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

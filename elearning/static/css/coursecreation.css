@@ -1,0 +1,62 @@
+/* Overall Page Layout */
+body {
+    font-family: Arial, sans-serif; /* Basic font choice */
+}
+
+main {
+    margin: 20px auto; /* Center content with some margin */
+    max-width: 800px;  /* Limit form width for readability */
+}
+
+/* Course Creation Form Styling */
+.course-creation-form { 
+    background-color: #f9f9f9; /* Light background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.form-group { 
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Text Input Fields */
+input[type="text"],
+textarea {
+    width: 100%;  /* Make inputs full width */
+    padding: 15px;  /* Increase input padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;  /* Consistent border radius */
+    font-size: 16px;  /* Consistent font size */
+}
+
+/* Input field focus style */
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none; /* Remove default outline */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.save-publish-button {
+    background-color: #4CAF50; /* Success green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save-publish-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
