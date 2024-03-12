@@ -11,35 +11,49 @@
 
 
 <body>
-    <header>
+    <header> 
         <div class="logo">
-            <!-- Logo -->
             <h1 class="platform-title">E-Learning</h1>
         </div>
         <nav> 
             <ul>
                 <li><a href="{% url 'home'%}">Home</a></li>  
-    
+
                 {% if user.is_authenticated %} 
                
                 <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
-    
+                
+
                     {% if user.user_type == 'student' %}  
                     <!-- Course List -->
-                    <li><a href="/courses/">Apply for Courses</a></li>    
-                    <li><a href="/search/">Search</a></li> 
-                        
-    
+                       
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
+
                     {% elif user.user_type == 'teacher' %}
-                        <li><a href="/search/">Search</a></li> 
-                        <li><a href="/courses/create/">Course Creation</a></li> 
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
                     {% endif %}
-    
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                    {% endif %}
+
                 {% else %}  
                     <li><a href="/login/">Login</a></li> 
                     <li><a href="/register/">Register</a></li> 
+                    
                 {% endif %}
-    
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+
+                
             </ul>
         </nav>
     </header>
@@ -61,7 +75,7 @@
 
         
     </section>
-
+    <!-- Course Listings -->
     <div class="course-listings">
         {% for course in courses %}
         <div class="course-card">
@@ -82,10 +96,10 @@
         {% endfor %}
     </div>
     <script>
-        var enrollmentsData = JSON.parse('{{ enrollments_json | safe }}'); // Parse the JSON data
+        var enrollmentsData = JSON.parse('{{ enrollments_json | safe }}'); // Parse the JSON data of all enrollments
       
         function updateEnrollButtons() {
-          var courseCards = document.querySelectorAll('.course-card');
+          var courseCards = document.querySelectorAll('.course-card'); // Get all course cards
       
           courseCards.forEach(card => {
             var courseId = card.querySelector('.course-id').textContent; // Get course ID
@@ -95,7 +109,7 @@
               // Enrolled
               enrollButton.textContent = 'View Course';
               enrollButton.classList.add('enrolled'); 
-              // Update the link within the <a> tag as well
+              
             }
           });
         }

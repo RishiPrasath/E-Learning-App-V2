@@ -11,8 +11,6 @@
 </head>
 <body>
     <header> 
-
-        
         <div class="logo">
             <h1 class="platform-title">E-Learning</h1>
         </div>
@@ -22,29 +20,41 @@
 
                 {% if user.is_authenticated %} 
                
-                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
-                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+                
+                
 
                     {% if user.user_type == 'student' %}  
                     <!-- Course List -->
-                    <li><a href="/courses/">Apply for Courses</a></li>    
-                    <li><a href="{% url 'search_page' %}">Search</a></li>  
-                        
+                    <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
 
                     {% elif user.user_type == 'teacher' %}
-                        <li><a href="{% url 'search_page' %}">Search</a></li> 
-                        <li><a href="{% url 'create_course' %}">Course Creation</a></li>  
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
                     {% endif %}
 
                 {% else %}  
                     <li><a href="/login/">Login</a></li> 
                     <li><a href="/register/">Register</a></li> 
+                    
                 {% endif %}
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
 
+                
             </ul>
         </nav>
-
-
     </header>
 
     <main>
@@ -111,14 +121,20 @@
         {% endif %}
 
         <!-- Display courses enrolled in by the user if they are a student -->
-        {% if user.is_student and courses_enrolled %}
-        <h3>Courses Enrolled</h3>
-        <ul class="course-list">
-            {% for course in courses_enrolled %}
-            <li>{{ course.title }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} 
+        {% if user.is_student %}
+            {% if courses_enrolled %}
+                <h3>Courses Enrolled</h3>
+                <ul class="course-list">
+                    {% for enrollment in courses_enrolled %}
+                        <li>{{ enrollment.course.title }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                
+            {% endif %}
+        {% else %}
+            
+        {% endif %}
 
 
  

@@ -22,13 +22,13 @@
                 {% if user.is_authenticated %} 
                
                 <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
-                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+                
 
                     {% if user.user_type == 'student' %}  
                     <!-- Course List -->
                     <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
                     <li><a href="{% url 'search_page' %}">Search</a></li> 
-                        
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
 
                     {% elif user.user_type == 'teacher' %}
                         <li><a href="{% url 'search_page' %}">Search</a></li>  
@@ -47,17 +47,30 @@
                     <li><a href="/register/">Register</a></li> 
                     
                 {% endif %}
+                
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
+
+                
             </ul>
         </nav>
     </header>
 
     <main>
-       <h1> Home Page </h1>
+       <div class="welcome-user-container">
+            <div class="welcome-message">
+                <h1>Welcome {{user.username}}</h1>
+            </div>
 
+            <div class="user-information">
+                <h2>User Information</h2>
+                <p>Username: {{ user.username }}</p>
+                <p>Email: {{ user.email }}</p>
+                <p>User Type: {{ user.user_type }}</p>
+            </div>
+        </div>
         <div class="status-updates-container"> 
             <h1>Status Updates</h1>
             <div class="status-updates">
@@ -66,25 +79,23 @@
 
         </div>
 
-
         <div class="course-notifications">
             <h1>Courses</h1>
             <div class="course-update">
                 <!-- Course updates will be appended here by the handleCourseUpdates function -->
             </div>
         </div>
-
+        {% if user.user_type == 'teacher' %}
         <div class="feedback-notifications">
             <h2>Feedback Notifications</h2>
             <!-- Feedback notifications will be appended here by the HandleFeedback function -->
         </div>
+        {% endif %}
 
         <div class="notifications-container">
             <h2>Chat Notifications</h2>
             <!-- Chat group notifications will be appended here by the handleChatNotifications function -->
         </div>
-
-
 
     </main>
 
@@ -92,13 +103,85 @@
     </footer>
 
     <script>
+        //Load intial notifications from notifications_json
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // Load initial notifications from the notifications_json django template variable
+            const initialNotifications = JSON.parse('{{ notifications_json|escapejs }}');
+            console.log('Initial Notifications:', initialNotifications);
+            //print field 'Course Enrollment'
+            
+            //Course Enrollment
+            coursenrollment = initialNotifications['Course Enrollment'];
+            for (let i = 0; i < coursenrollment.length; i++) {
+                const notification = coursenrollment[i];
+                handleCourseEnrollmentUpdates(notification);
+            }
+
+            //Status Updates
+            statusupdates = initialNotifications['Recent Status Update'];
+            for (let i = 0; i < statusupdates.length; i++) {
+                const notification = statusupdates[i];
+                handleStatusUpdates(notification);
+            }
+
+            //Courses
+            courses = initialNotifications['Courses'];
+            for (let i = 0; i < courses.length; i++) {
+                const notification = courses[i];
+                handleCourseUpdates(notification);
+            }
+
+            //New Topic
+            newtopic = initialNotifications['New Topic'];
+            for (let i = 0; i < newtopic.length; i++) {
+                const notification = newtopic[i];
+                handleNewTopicNotification(notification);
+            }
+
+            //New Material
+            newmaterial = initialNotifications['New Material'];
+            for (let i = 0; i < newmaterial.length; i++) {
+                const notification = newmaterial[i];
+                HandleNewMaterial(notification);
+            }
+
+            //Removed Enrollment
+            removedenrollment = initialNotifications['Removed Enrollment'];
+            for (let i = 0; i < removedenrollment.length; i++) {
+                const notification = removedenrollment[i];
+                HandleRemoveEnrollment(notification);
+            }
+
+            //Feedback
+            feedback = initialNotifications['Feedback'];
+            for (let i = 0; i < feedback.length; i++) {
+                const notification = feedback[i];
+                HandleFeedback(notification);
+            }
+
+            //Chat Notifications
+            chatnotifications = initialNotifications['chat'];
+            for (let i = 0; i < chatnotifications.length; i++) {
+                const notification = chatnotifications[i];
+                handleChatNotifications(notification);
+            }
+
+
+
+
+    
+            
+
+           
+
+       });
         const socket = new WebSocket('ws://localhost:8000/ws/notifications/');
         const userId = document.body.getAttribute('data-user-id'); // Get the current user's ID from the body tag
-    
         socket.onopen = function(event) {
             console.log('WebSocket connection established.');
         };
-    
         socket.onmessage = function(event) {
         const data = JSON.parse(event.data);
             // Check the type of notification and if the user is a recipient
@@ -119,7 +202,6 @@
             }else if (data.type === 'notify' && data.recipients_ids.includes(parseInt(userId))) {
                 handleChatNotifications(data);
             }
-            
             else {
                 console.log('Received message:', data);
             }
@@ -128,9 +210,12 @@
         socket.onclose = function(event) {
             console.log('WebSocket connection closed.');
         };
+
+
+        
+
     
         function handleCourseUpdates(notification) {
-            console.log('Handling Course Update: ', notification);
     
             const courseContainer = document.querySelector('.course-notifications .course-update'); // Ensure the selector matches your HTML structure
             const courseDiv = document.createElement('div');
@@ -150,7 +235,6 @@
         }
     
         function handleStatusUpdates(notification) {
-            console.log('Handling Status Update: ', notification);
     
             const updatesContainer = document.querySelector('.status-updates');
             const updateDiv = document.createElement('div');
@@ -170,7 +254,6 @@
         }
     
         function handleCourseEnrollmentUpdates(data) {
-            console.log('Handling Course Enrollment Update: ', data);
             const notificationsContainer = document.querySelector('.course-notifications .course-update');
             const notificationDiv = document.createElement('div');
             notificationDiv.classList.add('course-notification');
@@ -189,7 +272,6 @@
         }
         
         function handleNewTopicNotification(data) {
-            console.log('Handling New Topic Notification: ', data);
             if (data.notificationtype === 'New Topic' && data.recipients.includes(parseInt(userId))) {
                 // Your logic for handling new topic notifications
                 const notificationsContainer = document.querySelector('.course-notifications .course-update');
@@ -211,7 +293,6 @@
         }
 
         function HandleNewMaterial(data) {
-            console.log('Handling New Material Notification: ', data);
             if (data.notificationtype === 'New Material' && data.recipients.includes(parseInt(userId))) {
                 const notificationsContainer = document.querySelector('.status-updates'); // Adjust selector as needed
                 const notificationDiv = document.createElement('div');
@@ -232,7 +313,6 @@
         }
     
         function HandleRemoveEnrollment(data) {
-            console.log('Handling Removed Enrollment Notification: ', data);
             if (data.notificationtype === 'Removed Enrollment' && data.recipients.includes(parseInt(userId))) {
                 // Logic to display notification to the user
                 const notificationsContainer = document.querySelector('.status-updates'); // Use an existing or dedicated container for such messages
@@ -248,7 +328,6 @@
         }
     
         function HandleFeedback(data) {
-            console.log('Handling Feedback Notification: ', data);
             if (data.notificationtype === 'Feedback' && data.recipients.includes(parseInt(userId))) {
                 const notificationsContainer = document.querySelector('.feedback-notifications'); // Adjust selector as needed
                 const notificationDiv = document.createElement('div');
@@ -269,7 +348,6 @@
         }    
     
         function handleChatNotifications(data) {
-            console.log('Handling Chat Group Notification: ', data);
             // Example: Displaying the notification message. Adjust according to your page's structure.
             const notificationsContainer = document.querySelector('.notifications-container'); // Make sure this selector exists
             if (notificationsContainer) {

@@ -20,23 +20,38 @@
                 {% if user.is_authenticated %} 
                
                 <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
-                <li><a href="{% url 'post_status_update' %}">Status</a></li>
+                
 
                     {% if user.user_type == 'student' %}  
                     <!-- Course List -->
-                    <li><a href="/courses/">Apply for Courses</a></li>    
-                    <li><a href="{% url 'search_page' %}">Search</a></li> 
-                        
+                    <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
+                    
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
 
                     {% elif user.user_type == 'teacher' %}
-                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        
                         <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
                     {% endif %}
 
                 {% else %}  
                     <li><a href="/login/">Login</a></li> 
                     <li><a href="/register/">Register</a></li> 
+                    
                 {% endif %}
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+
+                
             </ul>
         </nav>
     </header>
@@ -55,6 +70,18 @@
         <section class="search-results">
             <h2>Search Results:</h2>
             <div class="grid-container">
+                {% if students%}
+                    {% for student in students %}
+                        <div class="card">
+                            <a href="{% url 'userprofile' student.username %}">
+                                <h1>Student</h1>
+                                <h3>{{ student.username }}</h3>
+                                <p>{{ student.bio }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 {% if teachers %}
                     {% for teacher in teachers %}
                         <div class="card">
@@ -78,7 +105,7 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                {% if not teachers and not courses %}
+                {% if not teachers and not students and not courses %}
                     <p>No results found.</p>
                 {% endif %}
             </div>

@@ -16,7 +16,7 @@ main {
 .status-updates-container h1, .course-notifications h1, .feedback-notifications h2, .notifications-container h2 {
     margin: 0;
     padding: 10px 15px;
-    background-color: #9bfad6; /* Bootstrap primary blue */
+    background-color: #05a14b; /* Bootstrap primary blue */
     color: white; /* White text */
     border-radius: 7px 7px 0 0; /* Rounded corners on top */
 }
@@ -49,4 +49,68 @@ main {
 /* Hover effect for links */
 .course-notification a:hover, .status-update a:hover, .feedback-notification a:hover, .chat-group-notification a:hover {
     text-decoration: underline; /* Add underline on hover for clarity */
+}
+
+
+/* Grid container for welcome message and user information */
+.welcome-user-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+    grid-gap: 20px; /* Gap between grid items */
+    margin-bottom: 20px;
+}
+
+/* Welcome message */
+.welcome-message {
+    grid-column: 1 / 3; /* Span both columns */
+    text-align: center;
+    width: 100%; /* Full width */
+}
+
+/* User information */
+.user-information {
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #dee2e6; /* Light grey border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+    padding: 20px;
+}
+
+/* User information title */
+.user-information h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* User information details */
+.user-information p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+
+/* Logout form styling */
+form {
+    display: inline; 
+}
+
+button {
+    
+    text-decoration: none;
+    color: #000; 
+    font-weight: bold;
+    
+    padding: 8px 15px; 
+    cursor: pointer;
+
+    margin-right: 20px;
+
+    /* Show only Text */
+    border: none; 
+    background-color: #E1F0DA; 
+    border-radius: 5px; 
+}
+
+button:hover {
+    background-color: #179e4f; 
 }

@@ -35,13 +35,14 @@ textarea {
     border-radius: 3px;
 }
 
-button {
+.feedback-submit {
     padding: 10px 20px;
     background-color: #1f9e69;
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    display: inline-block;
 }
 
 button:hover {

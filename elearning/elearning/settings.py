@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'el',
+    'el', 
     'livereload',
     'django_extensions',
-    'channels',
+    'channels', 
     
     
 ]

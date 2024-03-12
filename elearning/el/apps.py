@@ -6,4 +6,5 @@ class ElConfig(AppConfig):
     name = 'el'
 
     def ready(self):
-        import el.signals
+        print("elearning app is ready")
+        

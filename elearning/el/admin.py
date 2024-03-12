@@ -11,4 +11,5 @@ admin.site.register(CourseMaterial)
 admin.site.register(ChatGroup)
 admin.site.register(ChatMessage)
 admin.site.register(Feedback)
+admin.site.register(Notification)
 

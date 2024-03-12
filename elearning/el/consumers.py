@@ -37,6 +37,7 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
 
         print('Received message...')
+        
 
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
@@ -45,18 +46,32 @@ class ChatConsumer(WebsocketConsumer):
         topic_id = text_data_json['topic_id']
         chat_group_id = text_data_json['chat_group_id']
 
+        print('Message:', message)
+
+
+
+
+
+
 
          # Create ChatMessage object
         sender_user = PortalUser.objects.get(username=sender)
-        print('Creating Object...')
+        
+        print('Creating ChatMessage Object...')
         ChatMessage.objects.create(
             group_id=chat_group_id,
             user=sender_user,
             content=message
         )
 
+
+
+
         # Get the ChatGroup object and related course
         chat_group = ChatGroup.objects.get(id=chat_group_id)
+
+        print("Chat Group name:", chat_group.name)
+
         course = chat_group.course
 
         # Fetch all recipient IDs: students enrolled in the course + the course's teacher
@@ -64,14 +79,42 @@ class ChatConsumer(WebsocketConsumer):
         teacher_id = course.teacher.id
         recipients_ids = student_ids + [teacher_id]
 
+
+
+
+
+
+        '''
+        Refine chat message notification data to inculde the chat group name
+        '''
+        
+        refined_message = f"{sender} sent a message in the chat group for the topic, {chat_group.name} : {message}"
+
+        print("Refined message: ", refined_message)
+
+
+
         # Construct notification message data
         notification_message_data = {
             'type': 'notify',  # This should match a handler in Notification Consumer
             'chat_group_name': chat_group.name,
-            'message': message,
+            'message': refined_message,
             'sender': sender,
             'recipients_ids': recipients_ids,
         }
+
+        # Create Notification object
+        # Add student and teacher recipients PortalUser objects to the Notification object
+        notification = Notification.objects.create(
+            notificationtype='chat',
+            message=refined_message,
+            redirectURL=f'/chatpage/{course_id}/{topic_id}/',
+        )
+
+        notification.recipients.add(*recipients_ids)
+
+        print("Notification created...")
+        print("Message data: ", notification.message)
 
         # Send notification to Notification Consumer
         channel_layer = get_channel_layer()
@@ -143,7 +186,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
 
     async def notify(self, event):
-        # The event parameter contains the message data sent by group_send
+        
         await self.send(text_data=json.dumps({
             'type': event['type'],
             'chat_group_name': event.get('chat_group_name', ''),

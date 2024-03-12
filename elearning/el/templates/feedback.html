@@ -5,9 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
 </head>
 <body>
+
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                    
+                {% endif %}
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Feedback Container -->
     <div class="container">
         <h1>Course Feedback</h1>
         <form action="{% url 'submit_feedback' %}" method="post">
@@ -41,7 +91,7 @@
             
             <label for="review">Review (optional):</label>
             <textarea name="review" id="review" rows="4"></textarea>
-            <button type="submit">Submit Feedback</button>
+            <button class="feedback-submit" type="submit">Submit Feedback</button>
         </form>        
     </div>
 </body>

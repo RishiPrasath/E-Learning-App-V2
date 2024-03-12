@@ -19,23 +19,38 @@
             {% if user.is_authenticated %} 
            
             <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
-            <li><a href="{% url 'post_status_update' %}">Status</a></li>
+            
 
                 {% if user.user_type == 'student' %}  
                 <!-- Course List -->
-                <li><a href="/courses/">Apply for Courses</a></li>    
+                <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
                 <li><a href="{% url 'search_page' %}">Search</a></li> 
-                    
+                <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
 
                 {% elif user.user_type == 'teacher' %}
                     <li><a href="{% url 'search_page' %}">Search</a></li>  
                     <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
                 {% endif %}
 
+
+                {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                    
+                
+                <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                {% endif %}
+
             {% else %}  
                 <li><a href="/login/">Login</a></li> 
                 <li><a href="/register/">Register</a></li> 
+                
             {% endif %}
+            
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+
+            
         </ul>
     </nav>
 </header>
@@ -58,6 +73,23 @@
             <p>{{course.teacher.qualifications}}</p>
         </div>
     </div>
+
+    
+    {% if request.user.is_authenticated and request.user.is_teacher %}
+    <div class="feedback-container">
+        <h1>Feedback</h1>
+        <ul class="feedback-list">
+            {% for item in feedback %}
+            <li>
+                <p>{{ item.feedback }}</p>
+                <p>Rating: {{ item.rating }}</p>
+                <p>Review: {{ item.review }}</p>
+                <p>By: {{ item.student.username }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     {% if request.user.is_authenticated and request.user.is_teacher %}
     <div class="enrolled-students">
@@ -121,13 +153,13 @@
                     
                     <a href="{% url 'chat_page' course.id topic.id %}" class="button button-chat">Chat</a>
                     
-                    
+                    <!-- Upload Button -->
                     {% if request.user.is_authenticated and request.user.is_teacher %}
                     <button class="button button-upload" onclick="handleFileUpload({{ topic.id }});">Upload File</button>
                         
                     </button>
 
-
+                    <!-- Delete Topic Button -->
                     <div class="topic-deletebutton">
                         <form action="{% url 'delete_topic' course.id topic.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this topic?')">
                             {% csrf_token %}
@@ -143,9 +175,9 @@
 
     <script>
         function handleFileUpload(topicId) {
-            let fileInput = document.createElement('input');
+            let fileInput = document.createElement('input');// Create a new file input element
             fileInput.type = 'file';
-            fileInput.accept = ".pdf, .docx, image/*";
+            fileInput.accept = ".pdf, .docx, image/*"; // Accept only PDF, DOCX, and image files
             fileInput.onchange = function(event) {
                 let selectedFile = fileInput.files[0];
                 let formData = new FormData();
@@ -155,7 +187,7 @@
                 let uploadUrl = `/courses/{{ course.id }}/topics/${topicId}/upload/`;
     
                 console.log("Uploading file to", uploadUrl);
-    
+                // Send the file to the server
                 fetch(uploadUrl, {
                     method: 'POST',
                     body: formData,
@@ -179,7 +211,7 @@
                         let newFileContainer = document.createElement('div');
                         newFileContainer.classList.add('file-container');
                         
-                        
+                        // Create the HTML string for the new file container
                         htmlString = `
                             <div class="file-container">
                                 <div class="file-icon"></div>
@@ -203,7 +235,7 @@
                         console.log(htmlString);
                         
                         
-                        
+                        // Set the inner HTML of the new file container
                         newFileContainer.innerHTML = htmlString
                         materialList.appendChild(newFileContainer);
     

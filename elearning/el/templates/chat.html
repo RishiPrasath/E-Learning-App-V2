@@ -10,30 +10,72 @@
     <link rel="stylesheet" href="{% static 'css/chat.css' %}">
 </head>
 <body>
+    <header> 
+        <div class="logo">
+            <h1 class="platform-title">E-Learning</h1>
+        </div>
+        <nav> 
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>  
+
+                {% if user.is_authenticated %} 
+               
+                <li><a href="{% url 'userprofile' user.username %}">User Profile</a></li>
+                
+
+                    {% if user.user_type == 'student' %}  
+                    <!-- Course List -->
+                    <li><a href="{% url 'enrollment' %}">Apply for Courses</a></li>    
+                    <li><a href="{% url 'search_page' %}">Search</a></li> 
+                    <li><a href="{% url 'post_status_update' %}">Status Update</a></li>
+
+                    {% elif user.user_type == 'teacher' %}
+                        <li><a href="{% url 'search_page' %}">Search</a></li>  
+                        <li><a href="{% url 'create_course' %}">Course Creation</a></li> 
+                    {% endif %}
+
+
+                    {% if request.user.is_authenticated and request.user.is_student and request.user.enrollments.exists %}
+                        
+                    
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                    {% endif %}
+
+                {% else %}  
+                    <li><a href="/login/">Login</a></li> 
+                    <li><a href="/register/">Register</a></li> 
+                    
+                {% endif %}
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+
+                
+            </ul>
+        </nav>
+    </header>
     <h1>Chat Page</h1>
     <p>You are now on the chat page.</p>
     <p>Course: {{ course.title }}</p>
     <p>Topic: {{ topic.name }}</p>
-    <!-- Add chatgroup name here -->
+
     <p>Chat Group: {{ chat_group.name }}</p>
-    <!-- Add mock design here -->
+    
     <main>
         <section class="mock-design">
-            <!-- Your mock design code goes here -->
-            <div class="chat-header">
-                <h2>Chat with [Contact's Name]</h2>
-            </div>
             <div class="chat-messages">
                 <div class="message user-message">
                     MOCK USER MESSAGE 
                 </div>
                 <!-- More user messages can be added here -->
                 <div class="message other-message">
-                    Mock 'Others' Message
+                    
                 </div>
             </div>
         </section>
-        <!-- Add chat interface here -->
+        
         <section class="chat-interface">
             <form id="message-form">
                 <input type="text" id="message-input" placeholder="Type your message...">
